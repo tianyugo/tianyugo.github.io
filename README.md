@@ -1,3 +1,4 @@
-## this is my first code in GitHub.
-i love this [cat](https://github.com/tianyugo)
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+## this is my first code in GitHub.let me have try.
+i love this [cat](https://octodex.github.com/)
+this is my [profile](https://github.com/tianyugo)
+![GitHub Logo](/images/logo.png)
