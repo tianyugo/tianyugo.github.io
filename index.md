@@ -17,6 +17,6 @@ i have a lovely girlfriend.
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
-```
 
-![image](http://photo.weibo.com/3273373195/wbphotos/large/photo_id/4224394194317540/album_id/3697400086663925)
+
+![image](http://wx2.sinaimg.cn/large/c31bb60bly1fpye2hdcefj21hc0tzqv5.jpg)
