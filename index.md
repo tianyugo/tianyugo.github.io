@@ -12,5 +12,4 @@ context
 ### Header 3
 
 
-
 **Bold** and _Italic_ and `Code` text
