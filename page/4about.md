@@ -11,28 +11,25 @@ type: page
 
 ## 关于我
 
-<iframe src="https://githubbadge.appspot.com/gaohaoyang?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>
 
-在读于
 
-* 2018.6.28 毕业于大连海事大学
+在读于 大连理工大学 控制科学与工程
+
+* 2014.9-2018.6 [大连海事大学](http://www.dlmu.edu.cn/xxgk/xxjj.htm) 自动化
+* 2011.9-2014.6 [上海市格致中学]()
 
 ## 联系我
 
-* GitHub：[Gaohaoyang](https://github.com/Gaohaoyang)
-* email：gaohaoyang126@126.com
-* [Weibo](http://weibo.com/3115521wh)
-* [知乎](https://www.zhihu.com/people/gaohaoyang)
-* [Facebook](https://www.facebook.com/gaohaoyang.water)
-* [Twitter](https://twitter.com/gaohaoyang126)
-* [豆瓣](https://www.douban.com/people/42525035/)
-* [豆瓣音乐人-浩阳的小站](https://site.douban.com/haoyangaiyinyue/)
+* GitHub：[tianyu](https://github.com/tianyugo)
+* email：18221352970@sina.cn **.cn呐喂**
+* 新浪微博：[名字最最最最最长有几个字呢](http://weibo.com/1005053273373195)
+
 
 ## 关于本站
 
 **若您想使用这个 jekyll 博客主题，请访问：[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)**
 
-~。
+
 
 ### Update Log
 
