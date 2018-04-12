@@ -4,6 +4,7 @@ title:  "判断数据是否高斯分布"
 date:   2018/4/12 15:24:19 
 categories: me
 tags: matlab
+excerpt: 如题
 mathjax: true
 author: Tianyu Shen
 ---
