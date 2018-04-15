@@ -23,7 +23,7 @@ author: Tianyu Shen
    
 有很多可以注册域名的网站，[百度一下](https://www.baidu.com/s?tn=80035161_2_dg&wd=%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D)你就能得到答案，这里我是在阿里云（万网）上注册的，<del>买一个便宜的吧，万一你后悔了呢</del>。
 
-![1](https://i.imgur.com/T8QISRT.png)
+![1](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb2m59cmj20ra03qjr8.jpg)
 
 详细注册攻略推荐阅览：[教你免费且快速地搭建个人网站](https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78959859)的“域名怎么来的”部分。买完之后需要认证，所以根据网站提示快认证然后进行下一步。
 
@@ -36,11 +36,11 @@ author: Tianyu Shen
 登陆之后，点击你头像右上角的左边的 **＋**，新建项目。
 
 
-![2](https://i.imgur.com/S5bPzsm.png)
+![2](http://wx4.sinaimg.cn/mw690/c31bb60bly1fqdb2phzoij207p057t8l.jpg)
 
 名字固定格式 ：yourusername.github.io （我也不知道为啥，攻略都这么写= 。=）描述爱写就写，其他默认的就可以，直接创建。
 
-![3](https://i.imgur.com/eE3cWvA.png)
+![3](http://wx1.sinaimg.cn/mw690/c31bb60bly1fqdb2tx86fj20l70ic759.jpg)
 
 
 至此你就完成了域名和空间的创建。接下来要将你的 *域名* 和 *GitHub Pages* 连接(绑定)起来，再将你的博客内容放进你的空间里。
@@ -49,27 +49,27 @@ author: Tianyu Shen
 
 1.进入你的项目，点击设置。
 
- ![4](https://i.imgur.com/Je0ckmH.png)
+ ![4](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb2wc6jzj20t00bm74v.jpg)
 
 往下拉，找到GitHub Pages，1.选择一个模板主题，然后就会多出一个Custom domin ，在2处输入你刚买的的域名，保存就可以了。
 
-![5](https://i.imgur.com/yTnWEyp.png)
+![5](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb2yr25ij20lj0guq3r.jpg)
 
 2.为你的项目添加一个CHAME。在 code页，creat new file。
 
-![6](https://i.imgur.com/aElx283.png)
+![6](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb3iln33j20s208nq3g.jpg)
 
 文件名为CHAME，内容为你的域名
 
-![7](https://i.imgur.com/T4vMzsh.png)
+![7](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb3kpy4dj20tk07y74n.jpg)
 
 3.解析域名
 
-![9](https://i.imgur.com/br8dN3l.png)
+![9](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb3shjamj20f00gajs0.jpg)
 
 添加解析，记录类型为 CNAME，主机记录为@，记录值为 github 的仓库路径，如下图
 
-![8](https://i.imgur.com/Qbfc3WT.png)
+![8](http://wx1.sinaimg.cn/mw690/c31bb60bly1fqdb3pnmrwj216r0gkgmz.jpg)
 
 记得删除 txt  mx 类型的解析，详细理由我也没搞清就不多逼逼了。
 
@@ -82,7 +82,7 @@ author: Tianyu Shen
 
 具体链接：[关于这个简洁明快的博客主题](inghttps://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
 
-![11](https://i.imgur.com/BdMOEEn.png)
+![11](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb445z2ej209r09kglo.jpg)
 
 Github Desktop 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。
 
@@ -91,17 +91,17 @@ makedown编译器，特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 �
 
 那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。这个网站用了[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)的模板 下载下来先。
 
-![10](https://i.imgur.com/rl4jubr.png)
+![10](http://wx4.sinaimg.cn/mw690/c31bb60bly1fqdb3v52k4j20u50htjsh.jpg)
 
 把你的仓库也下载来，把里面的文件全部都删了（除了CHAME）然后把模板里的东西全部拖到你的原博客仓库里。打开你的 GitHub，需要登陆，提醒你有change，**图片里修改内容不应该是这样**按1 2 3步骤完成上传。
 
-![12](https://i.imgur.com/udXEkLC.png)
+![12](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb47390qj20v20k6wfx.jpg)
 
 **试试吧，去你的个人网站看看。**
 
 之后修改你的本地文件，同步到GitHub项目就可以了（需要你对GitHub desktop慢慢熟练），那么怎么修改，修改什么呢。
 
-![13](https://i.imgur.com/Wz5CuA6.png)
+![13](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb4a9zgrj206x0a43yf.jpg)
 
 _config.yml：这是你博客的基本配置文件，里面有你博客的名字，以及存放博主的一些基本信息
 
