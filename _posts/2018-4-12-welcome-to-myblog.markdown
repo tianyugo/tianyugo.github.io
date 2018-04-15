@@ -23,7 +23,7 @@ author: Tianyu Shen
    
 有很多可以注册域名的网站，[百度一下](https://www.baidu.com/s?tn=80035161_2_dg&wd=%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D)你就能得到答案，这里我是在阿里云（万网）上注册的，<del>买一个便宜的吧，万一你后悔了呢</del>。
 
-![](https://i.imgur.com/T8QISRT.png)
+![1](https://i.imgur.com/T8QISRT.png)
 
 详细注册攻略推荐阅览：[教你免费且快速地搭建个人网站](https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78959859)的“域名怎么来的”部分。买完之后需要认证，所以根据网站提示快认证然后进行下一步。
 
@@ -36,11 +36,11 @@ author: Tianyu Shen
 登陆之后，点击你头像右上角的左边的 **＋**，新建项目。
 
 
-![](https://i.imgur.com/S5bPzsm.png)
+![2](https://i.imgur.com/S5bPzsm.png)
 
 名字固定格式 ：yourusername.github.io （我也不知道为啥，攻略都这么写= 。=）描述爱写就写，其他默认的就可以，直接创建。
 
-![](https://i.imgur.com/eE3cWvA.png)
+![3](https://i.imgur.com/eE3cWvA.png)
 
 
 至此你就完成了域名和空间的创建。接下来要将你的 *域名* 和 *GitHub Pages* 连接(绑定)起来，再将你的博客内容放进你的空间里。
@@ -49,19 +49,27 @@ author: Tianyu Shen
 
 1.进入你的项目，点击设置。
 
- ![](https://i.imgur.com/Je0ckmH.png)
+ ![4](https://i.imgur.com/Je0ckmH.png)
 
 往下拉，找到GitHub Pages，1.选择一个模板主题，然后就会多出一个Custom domin ，在2处输入你刚买的的域名，保存就可以了。
 
-![](https://i.imgur.com/yTnWEyp.png)
+![5](https://i.imgur.com/yTnWEyp.png)
 
 2.为你的项目添加一个CHAME。在 code页，creat new file。
 
-![](https://i.imgur.com/aElx283.png)
+![6](https://i.imgur.com/aElx283.png)
 
 文件名为CHAME，内容为你的域名
 
-![](https://i.imgur.com/T4vMzsh.png)
+![7](https://i.imgur.com/T4vMzsh.png)
 
 3.解析域名
+
+![9](https://i.imgur.com/br8dN3l.png)
+
+添加解析，记录类型为 CNAME，主机记录为@，记录值为 github 的仓库路径，如下图
+
+![8](https://i.imgur.com/Qbfc3WT.png)
+
+记得删除 txt  mx 类型的解析，详细理由我也没搞清就不多逼逼了。
 
