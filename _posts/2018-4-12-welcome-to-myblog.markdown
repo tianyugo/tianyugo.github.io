@@ -14,7 +14,9 @@ author: Tianyu Shen
 
 ## 前言 ##
 
-本文主要简述自己这几天建站的过程，和几个良心的教程推荐。根本不废话，递上自己博客地址：[http://tianyugo.top](http://tianyugo.top) <del>狗就狗吧</del>
+本文主要简述自己这几天建站的过程，和几个良心的教程推荐。
+
+根本不废话，递上自己博客地址：[http://tianyugo.top](http://tianyugo.top) <del>狗就狗吧</del>
 
 ## 正片 ##
 要想用搭建一个个人博客网站，首先你得有一个域名，这样别人才可以通过域名访问，其次你还要一个空间来存放你的页面。[[1]](https://blog.csdn.net/tzs_1041218129/article/details/53214497)
@@ -84,9 +86,13 @@ author: Tianyu Shen
 
 ![11](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb445z2ej209r09kglo.jpg)
 
-Github Desktop 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。
 
-makedown编译器，特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
+
+> Github Desktop 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。
+
+
+
+> makedown编译器，特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
 
 
 那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。这个网站用了[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)的模板 下载下来先。
