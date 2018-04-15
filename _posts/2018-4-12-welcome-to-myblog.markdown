@@ -73,3 +73,57 @@ author: Tianyu Shen
 
 记得删除 txt  mx 类型的解析，详细理由我也没搞清就不多逼逼了。
 
+现在你试试能不能进入你的域名了，如果成功的话，出现的就是你选择的模板。
+
+ 
+- 上传个人网页
+
+我的方法是 日常只需要* GitHub Desktop *上传 和 *makedown* 编译器写博客就可以。如果你想在本地阅览博客再上传 需要安装 ruby 和 jekyll 环境，这一部分我还 *有待学习*。
+
+具体链接：[关于这个简洁明快的博客主题](inghttps://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
+
+![11](https://i.imgur.com/BdMOEEn.png)
+
+Github Desktop 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。
+
+makedown编译器，特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
+
+
+那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。这个网站用了[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)的模板 下载下来先。
+
+![10](https://i.imgur.com/rl4jubr.png)
+
+把你的仓库也下载来，把里面的文件全部都删了（除了CHAME）然后把模板里的东西全部拖到你的原博客仓库里。打开你的 GitHub，需要登陆，提醒你有change，**图片里修改内容不应该是这样**按1 2 3步骤完成上传。
+
+![12](https://i.imgur.com/udXEkLC.png)
+
+**试试吧，去你的个人网站看看。**
+
+之后修改你的本地文件，同步到GitHub项目就可以了（需要你对GitHub desktop慢慢熟练），那么怎么修改，修改什么呢。
+
+![13](https://i.imgur.com/Wz5CuA6.png)
+
+_config.yml：这是你博客的基本配置文件，里面有你博客的名字，以及存放博主的一些基本信息
+
+_posts：这里面装的就是你的博文啦。。md文件，用MarkdownPad 2修改。按模板用makedown语言写。
+
+favicon：网页的小图标。我找小图片的[网站](https://www.iconfinder.com/)推荐给你。
+
+其他的就不详细说明了可以去 [关于这个简洁明快的博客主题](inghttps://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)进一步研究，但还主要还是自己改改看看就会明白啦，所以之前提到的本地阅览还是很有必要学习的，不然修改起来比较麻烦。
+
+## 后记吧 ##
+我使用的是基于 jekyll的，也可以使用 Hexo+Github Pages 搭建，我嫌麻烦也没有 *深入研究*。
+
+写完感觉，也不知道能不能有人看明白，写的太简单，如上文中提到的，还有很要多学习，很多改进的地方。如果有啥问题的话可以通过微博私信、邮件等方式联系我，联系方式都在about里。
+
+参考文献：
+
+1.[教你免费且快速地搭建个人网站](https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78959859)
+
+2.[利用Github Page 搭建个人博客网站](https://blog.csdn.net/tzs_1041218129/article/details/53214497)
+
+3.[手把手教你用github pages搭建博客 最新版](https://blog.csdn.net/superjimmy/article/details/51626842)
+
+4.[傻瓜都可以利用github pages建博客](http://cyzus.github.io/2015/06/21/github-build-blog/)
+
+5.[我是如何利用Github Pages搭建起我的博客，细数一路的坑](https://www.cnblogs.com/jackyroc/p/7681938.html)
