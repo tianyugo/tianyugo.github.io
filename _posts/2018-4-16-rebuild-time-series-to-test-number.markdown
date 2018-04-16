@@ -19,23 +19,22 @@ author: Tianyu Shen
    %a为原序列，1×N
    %嵌入维数 n
    %textx n× bujieshouzhiyi
-function [testx,testy]=getchange(a,n)
+function [trainx,trainy]=getchange(a,n)
 n=n-1;
 N=size(a,2);
-testx=[];
-testy=[];
+trainx=[];
+trainy=[];
 for i=1:N-n-1
     b=[];
     for j=i:n+i
         b=[b;a(j)];
     end
-    testx=[testx,b];
+    trainx=[trainx,b];
 end
 
 for i=n+2:N
-    testy=[testy,a(i)];
+    trainy=[trainy,a(i)];
 end
-
 ~~~
 
 虽然没标注，应该没啥大问题。
