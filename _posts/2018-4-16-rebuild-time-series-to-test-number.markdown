@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "重构序列，做训练集"
-date:   2018/4/16 10:46:56  
+title:  "一些自用数据处理的算法（Matlab）"
+date:   2018/4/16 16:32:45  
 categories: me
-tags: matlab
-excerpt: 将一位序列重构为嵌入n维的数据集
+tags: Matlab DataProcessing
+excerpt: 归一化，重构序列
 mathjax: true
 author: Tianyu Shen
 ---
@@ -12,10 +12,13 @@ author: Tianyu Shen
 * content
 {:toc}
 
-# 重构序列，做训练集 #
+## 1. 重构序列，做训练集 ##
 
+虽然没标注，应该没啥大问题。
+
+2018/4/16 10:46:56
 ~~~
-%% 时间序列，转化成神经网络训练集2018/4/16
+%% 时间序列，转化成训练集  
    %a为原序列，1×N
    %嵌入维数 n
    %textx n× bujieshouzhiyi
@@ -37,4 +40,17 @@ for i=n+2:N
 end
 ~~~
 
-虽然没标注，应该没啥大问题。
+
+
+
+##2. 归一化函数  ##
+
+关于归一化函数（mapminmax）的三种常用格式。
+~~~
+[Y,PS] = mapminmax(X,YMIN,YMAX)
+Y = mapminmax('apply',X,PS)
+
+X = mapminmax('reverse',Y,PS)
+~~~
+
+
