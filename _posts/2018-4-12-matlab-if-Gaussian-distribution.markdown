@@ -24,10 +24,11 @@ normplot(x);
 越接近红线表明服从正态分布的规律越好
 
 定量的正态检验可以使用Kolmogorov-Smirnov 检验，可help kstest
+
 kstest是检验数据是否服从标准正态分布
 ~~~
 y=zscore(x);   %进行标准化处理
-h= kstest(y）
+h= kstest(y);
 ~~~
-我用你的数据检验后h=0;
-说明不能拒绝数据服从正态分布。
+h=0;
+说明数据服从正态分布。
