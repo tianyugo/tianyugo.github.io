@@ -82,7 +82,7 @@ author: Tianyu Shen
 
 我的方法是 日常只需要* GitHub Desktop *上传 和 *makedown* 编译器写博客就可以。如果你想在本地阅览博客再上传 需要安装 ruby 和 jekyll 环境，这一部分我还 *有待学习*。
 
-具体链接：[关于这个简洁明快的博客主题](inghttps://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)
+具体链接：[关于这个简洁明快的博客主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)的README。
 
 ![11](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb445z2ej209r09kglo.jpg)
 
@@ -115,7 +115,7 @@ _posts：这里面装的就是你的博文啦。。md文件，用MarkdownPad 2�
 
 favicon：网页的小图标。我找小图片的[网站](https://www.iconfinder.com/)推荐给你。
 
-其他的就不详细说明了可以去 [关于这个简洁明快的博客主题](inghttps://github.com/Gaohaoyang/gaohaoyang.github.io/blob/master/README-zh-cn.md)进一步研究，但还主要还是自己改改看看就会明白啦，所以之前提到的本地阅览还是很有必要学习的，不然修改起来比较麻烦。
+其他的就不详细说明了可以去 [关于这个简洁明快的博客主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)进一步研究，但还主要还是自己改改看看就会明白啦，所以之前提到的本地阅览还是很有必要学习的，不然修改起来比较麻烦。
 
 ## 后记吧 ##
 我使用的是基于 jekyll的，也可以使用 Hexo+Github Pages 搭建，我嫌麻烦也没有 *深入研究*。
