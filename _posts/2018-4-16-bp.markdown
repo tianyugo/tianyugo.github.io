@@ -9,7 +9,7 @@ mathjax: true
 author: Tianyu Shen
 ---
 
-##BP（Backpropagation）算法  ##
+## BP（Backpropagation）算法  ##
 
 bp神经网络属于前向型神经网络，back propagation表示**误差反向传播**
 
@@ -31,7 +31,8 @@ net = newff（trainx,trainy,9） %一列 x 对应一列 y ，第一层隐含层*
 %% 设置训练参数
 
 net.trainParam.epochs=1000;    %迭代次数              
-net.trainParam.goal=0.001;     %目标误差小于..                          net.trainParam.lr=0.01;		   %学习率
+net.trainParam.goal=0.001;     %目标误差小于..        
+net.trainParam.lr=0.01;		   %学习率
 
 %% 训练网络
 
