@@ -32,7 +32,7 @@ net = newff（trainx,trainy,9） %一列 x 对应一列 y ，第一层隐含层*
 
 net.trainParam.epochs=1000;    %迭代次数              
 net.trainParam.goal=0.001;     %目标误差小于..        
-net.trainParam.lr=0.01;		     %学习率
+net.trainParam.lr=0.01;		  %学习率
 
 %% 训练网络
 
