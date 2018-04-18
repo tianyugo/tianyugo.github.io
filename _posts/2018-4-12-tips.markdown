@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "判断数据是否高斯分布"
+title:  "Knowledge"
 date:   2018/4/12 15:24:19 
 categories: me
 tags: matlab
-excerpt: 如题
+excerpt: 知识就是力量
 mathjax: true
 author: Tianyu Shen
 ---
@@ -12,7 +12,9 @@ author: Tianyu Shen
 * content
 {:toc}
 
-# 判断数据是否高斯分布 #
+
+### 判断数据是否高斯分布  ###
+
 转自[http://www.ilovematlab.cn/thread-42634-1-1.html](http://www.ilovematlab.cn/thread-42634-1-1.html)
 
 可以先使用normplot对数据的正态性进行定性了解
@@ -32,3 +34,13 @@ h= kstest(y);
 ~~~
 h=0;
 说明数据服从正态分布。
+
+
+
+### Unicode  ###
+  
+Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。
+
+[字符编码介绍 通俗易懂 强烈推荐](https://blog.csdn.net/yht520100/article/details/40264271)
+
+
