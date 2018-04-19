@@ -13,7 +13,7 @@ author: Tianyu Shen
 {:toc}
 
 
-## 判断数据是否高斯分布  ##
+# 判断数据是否高斯分布  #
 
 转自[http://www.ilovematlab.cn/thread-42634-1-1.html](http://www.ilovematlab.cn/thread-42634-1-1.html)
 
@@ -36,10 +36,29 @@ h=0;
 
 
 
-## Unicode  ##
+# Unicode  #
   
 Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。
 
 [字符编码介绍 通俗易懂 强烈推荐](https://blog.csdn.net/yht520100/article/details/40264271)
 
 
+# matlab中如何使用外部工具箱 #
+
+- 首先，将下载的工具箱文件解压，将文件夹复制到MATLAB安装目录下toolbox文件夹下。
+
+
+- 其次，在MATLAB命令行中输入如下命令：
+
+~~~
+>> cd D:\MATLAB7\toolbox\piotr_toolbox % 找到你的工具箱
+>> addpath(genpath('D:\MATLAB7\toolbox\piotr_toolbox')) %增加路径
+>> savepath %永久保存路径
+~~~
+
+- 最后，检查是否成功：
+
+~~~
+>>which hog %随便输入所加入工具箱中的一个m文件
+D:\MATLAB7\toolbox\piotr_toolbox\channels\hog.m %得到此文件路径，即加载正确
+~~~
