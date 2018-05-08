@@ -39,7 +39,31 @@ for i=n+2:N
 end
 ~~~
 
+更新：多步
+~~~
+function [trainx,trainy]=getchange(a,n,k)
+%% 时间序列，转化成神经网络训练集沈天宇2018/4/16
+   %a为原序列，1×N
+   %嵌入维数 n
+   %k步预测
+   %trainx n× bujieshouzhiyi
+   
+n=n-1;
+N=size(a,2);
+trainx=[];
+trainy=[];
+for i=1:N-n-k
+    b=[];
+    for j=i:n+i
+        b=[b;a(j)];
+    end
+    trainx=[trainx,b];
+end
 
+for i=n+1+k:N
+    trainy=[trainy,a(i)];
+end
+~~~
 
 
 ## 2. 归一化函数  ##
@@ -51,5 +75,16 @@ Y = mapminmax('apply',X,PS)
 
 X = mapminmax('reverse',Y,PS)
 ~~~
+
+## 2. 删除NAN值  ##
+
+删除NAN值。
+~~~
+test(isnan(test(:,1))==1)=[];
+
+%2016b中
+c = rmmissing(a)
+~~~
+[1](https://jingyan.baidu.com/article/5bbb5a1beca14513eaa17962.html)|[2](https://jingyan.baidu.com/article/0a52e3f4e86e5ebf62ed728a.html)
 
 
