@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 $X=\{X_1,\ldots,X_n\}
 质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。
 $$ 表示整行公式：
