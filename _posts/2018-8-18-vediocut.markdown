@@ -3,7 +3,7 @@ layout: post
 title:  "视频剪辑及后期字幕"
 date:   2018/8/18 20:43:20   
 categories: you
-tags: baidu 
+tags: vedio 
 excerpt: 分享一些近期学习使用的视频剪辑相关软件
 mathjax: true
 author: Sky
