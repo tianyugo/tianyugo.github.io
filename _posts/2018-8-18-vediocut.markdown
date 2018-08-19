@@ -17,12 +17,13 @@ author: Sky
 ## 正片 ##
 ### 视频剪辑 Eduis 7 ###
 首先使用的视频剪辑软件是Eduis 7，下载地址可以直接百度，或者根据我的[百度云链接](https://pan.baidu.com/s/1dq7lbAnOr7SK9jG4IVIMog) 密码: mi42，先setup然后再用傻瓜式的破解，update安装包我是没有安装成功，竟然直接给我卸载了。
+
 ![](https://i.imgur.com/W1YrgnX.png)
 
 没有看明白安装过程的，或者有兴趣的小伙伴可以参考下赛强视频里提到的百度[安装链接](http://www.lookae.com/edius7cark/)。
 
 此外没有视频剪辑软件基础的小伙伴，可以参考b站[edius剪辑软件基础讲解](https://www.bilibili.com/video/av5466027)进行简单的学习即可上手。
-### 字幕相关TimeM & Aegisub###
+### 字幕相关TimeM & Aegisub ###
 字幕软件[链接](http://pan.baidu.com/s/1hrFmfi8) 密码：v69a
 具体过程可以参考赛强的视频，讲的详细，建议投币交学费呦。
 
@@ -38,6 +39,9 @@ author: Sky
 
 也是为了之后想做个vlog提前做准备了，现阶段还是使用到了比较少的功能，勉励自己多学吧。也是为了练习一下写文，听已工作的同学github快去学学用啊，而我也只是会用desktop客户端，又躺了半个月，四个月没更新了也是再次活了，总之就是勉励下自己。2018/8/18 21:56:54 
 
+联系方式：email 18221352970@sina.cn **.cn呐喂**
+
+![](https://i.imgur.com/WBd0PHs.png)
 
 
 
