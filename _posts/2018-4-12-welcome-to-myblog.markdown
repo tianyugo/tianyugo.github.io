@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "hello MyBlog!"
+title:  "hello MyBlog!建站教程"
 date:   2018-04-12 10:25
 categories: you
 tags: blog GitHub jekyll
