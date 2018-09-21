@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "谷歌浏览器插件不翻墙安装方法"
+date:   2018/9/21 20:54:26    
+categories: you
+tags: chrome extensions
+excerpt: 教你使用谷歌浏览插件的正确姿势
+mathjax: true
+author: Sky
+---
+
+* content
+{:toc}
+
+## 前言 ##
+最近换了工作设备，于是安上了谷歌浏览器，后又重新找资料，安上了自己常用的插件。众所周知，谷歌应用商店，不“科学上网”是上不了的，而谷歌浏览器更新了版本之后连离线下载的crx都不能直接“丢进”[扩展程序](chrome://extensions/)中了，于是就有了这篇小作文，主要记录一下插件的科学安装方法顺带记上自己几个自己常用的插件，以防失忆。
+## 正片 ##
+### 研究背景 ###
+谷歌自Chrome 67 版本开始，只允许从Chrome网上商店安装扩展，其他方式的安装都已被删除。所以说之前从第三方下载的安装包不能再直接安装了。本文采用插件伴侣成功实现安装。Chrome插件伴侣的[下载地址](http://crxhelp.bj.bcebos.com/crxhelp.zip)。防止被和谐，[百度云链接](https://pan.baidu.com/s/14Sr79NM97jj4-tgjw7wkIA) ，提取码: g5rm。
+### 使用方法 ###
+接下来以截图的方式：。。不还是不介绍了太简单了。直接选择你自己下载的插件，安装就完事了，比较麻烦的是需要关闭浏览器才能安装。找插件的网站字啊这里推荐[一个](https://www.crx4chrome.com/)。
+
+![](https://i.imgur.com/bKwh9N0.png)
+
+需要注意的是安装完成后，需要再上文提到的[扩展程序](chrome://extensions/)中（你也可以从浏览器的更多工具中打开扩展程序）点击安装完成的插件的右下角的滑动开关手动开启。OK！
+
+
+### 插件云 ###
+- Tampermonkey 牛逼！我的理解就是小小插件，很多大佬写的小应用比如视频网站免广告，破解会员
+- Vysor 手机在电脑上投屏
+- ctotree GitHub左侧展开仓库
+- Monentum 最近刚安的，优化浏览器新建空白页，有个好看的图片。
+- The Great Suspender 暂停后台打开长时间未使用的页面“休眠”，一定程度上解决了用户们诟病的谷歌浏览器占用内存过大（好像大家都很喜欢打开几十个标签页，关了就很难受=  = ）
+
+
+
+## 后记&致谢 ##
+以下为参考文献：
+[吹谷歌浏览器](https://www.zhihu.com/question/19618233)|[偷师一号](https://blog.csdn.net/qq_42690685/article/details/81039700)|[偷师二号](https://blog.csdn.net/wanwuguicang/article/details/80716178)
+
+
+2018/9/21 21:55:40 
+
+联系我：18221352970@sina.cn
+
+
+
+
+
+
+
+
+
+  
+
+
