@@ -86,17 +86,21 @@ author: Tianyu Shen
 ### 整上网页 ###
 
 我的方法是 日常只需要* GitHub Desktop *上传 和 *makedown* 编译器写博客就可以。
-####1. 两个工具： ####
- #####1） Github Desktop  #####
+#### 1. 两个工具： ####
+
+##### 1） Github Desktop  #####
+
 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。最近也开始学习Git bush
 
 
 
 ##### 2）MarkDown编译器  #####
+
 特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
 > 更新！[MarkdownPad 2的安装、配置](https://blog.csdn.net/xiaojin21cen/article/details/78752561#_24)
 
-#####3） 其他  #####
+##### 3） 其他  #####
+
 如果你想在本地阅览博客再上传 需要安装 ruby 和 jekyll 环境，这一部分我还 *有待学习*。
 
 具体链接：[关于这个简洁明快的博客主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)的README。
@@ -105,14 +109,17 @@ author: Tianyu Shen
 
 
 #### 2.开始操作 ####
+
 那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。通过使用Github Desktop作为媒介，使本地修改同步到Github仓库。
+
 ##### 初始化 #####
 
-我的博客网站使用了[我的GitHub](https://github.com/Gaohaoyang/gaohaoyang.github.io)的模板，下载下来先。图片展示的是我的Github仓库。
+我的博客网站使用了[我的GitHub](https://github.com/tianyugo/tianyugo.github.io)的模板，下载下来先。图片展示的是我的Github仓库。
 
 ![10](http://wx4.sinaimg.cn/mw690/c31bb60bly1fqdb3v52k4j20u50htjsh.jpg)
 
 把下载下来的项目，整到自己的仓库中，同步到本地中。过程不再详述。（= =，就是我修改的时候懵了，不想写了）
+
 ##### 修改 #####
 
 之后修改你的本地文件，同步到GitHub项目就可以了。打开你的 GitHub desktop，需要登陆，提醒你有change，按1 2 3步骤完成上传。
@@ -120,7 +127,9 @@ author: Tianyu Shen
 ![12](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb47390qj20v20k6wfx.jpg)
 
 **试试吧，去你的个人网站看看。**
+
 ##### 备注 #####
+
 那么怎么修改，修改什么呢。
 
 ![13](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb4a9zgrj206x0a43yf.jpg)
