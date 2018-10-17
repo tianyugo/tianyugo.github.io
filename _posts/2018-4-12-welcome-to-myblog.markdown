@@ -12,6 +12,7 @@ author: Tianyu Shen
 * content
 {:toc}
 
+
 ## 前言 ##
 
 本文主要简述自己这几天建站的过程，和几个良心的教程推荐。
@@ -93,6 +94,7 @@ author: Tianyu Shen
 
 
 > makedown编译器，特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
+> 更新！[MarkdownPad 2的安装、配置](https://blog.csdn.net/xiaojin21cen/article/details/78752561#_24)
 
 
 那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。这个网站用了[https://github.com/Gaohaoyang/gaohaoyang.github.io](https://github.com/Gaohaoyang/gaohaoyang.github.io)的模板 下载下来先。
