@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "hello MyBlog!建站教程"
+title:  "Hello MyBlog!无敌的建站教程"
 date:   2018-04-12 10:25
 categories: you
 tags: blog GitHub jekyll
@@ -9,9 +9,8 @@ mathjax: true
 author: Tianyu Shen
 ---
 
-* content
-{:toc}
 
+[TOC]
 
 ## 前言 ##
 
@@ -29,7 +28,7 @@ author: Tianyu Shen
 
 #### 域名  ####
    
-有很多可以注册域名的网站，[百度一下](https://www.baidu.com/s?tn=80035161_2_dg&wd=%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D)你就能得到答案，这里我是在阿里云（万网）上注册的，<del>买一个便宜的吧，万一你后悔了呢</del>。
+有很多可以注册域名的网站，[百度一下](https://www.baidu.com/s?tn=80035161_2_dg&wd=%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D)你就能得到答案，这里我是在阿里云（万网）上注册的，<del>买一个便宜的吧，万一你后悔了呢</del>。2018/10/19更新 我发现涨价了！
 
 ![1](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb2m59cmj20ra03qjr8.jpg)
 
