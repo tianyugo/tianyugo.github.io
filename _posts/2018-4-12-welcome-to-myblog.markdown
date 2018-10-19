@@ -10,7 +10,8 @@ author: Tianyu Shen
 ---
 
 
-[TOC]
+* content
+{:toc}
 
 ## 前言 ##
 
