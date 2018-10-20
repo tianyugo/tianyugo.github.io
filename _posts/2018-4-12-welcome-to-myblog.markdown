@@ -86,20 +86,20 @@ author: Tianyu Shen
 ### 整上网页 ###
 
 我的方法是 日常只需要* GitHub Desktop *上传 和 *makedown* 编译器写博客就可以。
-#### 1. 两个工具： ####
+####  两个工具： ####
 
-##### 1） Github Desktop  #####
+#####  Github Desktop  #####
 
 可以同步你 github 网站上的项目与本地文件，也就是说改了本地文件内容可以同步到网站，改了网站文件内容可以同步到本地。最近也开始学习Git bush
 
 
 
-##### 2）MarkDown编译器  #####
+##### MarkDown编译器  #####
 
 特别多，我是用的是 MarkdownPad 2。[MarkdownPad 2 安装和破解](https://blog.csdn.net/github_35160620/article/details/52158604)，[MarkdownPad 2 在win10下出错：HTML 渲染错误(This view has crashed) 的解决办法](https://blog.csdn.net/wyc12306/article/details/51504906)
 > 更新！[MarkdownPad 2的安装、配置](https://blog.csdn.net/xiaojin21cen/article/details/78752561#_24)
 
-##### 3） 其他  #####
+#####  其他  #####
 
 如果你想在本地阅览博客再上传 需要安装 ruby 和 jekyll 环境，这一部分我还 *有待学习*。
 
@@ -108,7 +108,7 @@ author: Tianyu Shen
 ![11](http://wx2.sinaimg.cn/mw690/c31bb60bly1fqdb445z2ej209r09kglo.jpg)
 
 
-#### 2.开始操作 ####
+#### 开始操作 ####
 
 那么开始，大概就是先找一个博客模板，然后改改，也可以自己建。通过使用Github Desktop作为媒介，使本地修改同步到Github仓库。
 
@@ -151,7 +151,7 @@ favicon：网页的小图标。我找小图片的[网站](https://www.iconfinder
 
 如果有啥问题的话可以通过邮件方式联系我 18221352970@sina.cn 
 
-### 参考文献： ###
+### 参考文献 ###
 
 1.[教你免费且快速地搭建个人网站](https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78959859)
 
