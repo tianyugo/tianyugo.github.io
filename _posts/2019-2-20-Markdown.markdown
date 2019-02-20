@@ -4,7 +4,7 @@ title:  "MarkdownPad2完美安装"
 date:   2019/02/20       
 categories: me you
 tags: MarkdownPad2 .md
-excerpt: win10下 MarkdownPad2完美安装办法：解决右侧显示的 HTML 渲染错误、切换中文模式+专业版激活码
+excerpt: win10下 MarkdownPad2完美安装办法：解决右侧显示的 HTML 渲染错误、切换中文模式、专业版激活码
 mathjax: true
 author: Sky
 ---
@@ -33,9 +33,9 @@ License Key:
 
 #### 切换中文语言 ####
 
-**Tools**——**Options**(直接按F7)
+Tools——Options(直接按F7)
 
-**Editor**-**Language**:选择`中国`
+Editor-**Language**:选择`中国`
 
 
 
