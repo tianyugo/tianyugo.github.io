@@ -122,7 +122,7 @@ author: Tianyu Shen
 
 ##### 修改 #####
 
-之后修改你的本地文件，同步到GitHub项目就可以了。打开你的 GitHub desktop，需要登陆，提醒你有change，按1 2 3步骤完成上传。1是主题（必要）2是详细描述（非必要）
+之后修改你的本地文件，同步到GitHub项目就可以了。打开你的 GitHub desktop，需要登陆，提醒你有change，按1 2 3步骤完成上传。
 
 ![12](http://wx3.sinaimg.cn/mw690/c31bb60bly1fqdb47390qj20v20k6wfx.jpg)
 
