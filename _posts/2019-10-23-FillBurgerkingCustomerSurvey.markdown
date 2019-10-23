@@ -102,6 +102,8 @@ Github地址：[https://github.com/tianyugo/FillBurgerkingCustomerSurvey](https:
 程序基于unittest单元测试框架。暂有改进思路：
 	
 - 实现多调查码循环完成。
+- 对该框架并不了解太多，可改写成普通的脚本。
+
 
 
 
