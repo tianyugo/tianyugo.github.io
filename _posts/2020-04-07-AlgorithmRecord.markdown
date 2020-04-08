@@ -24,18 +24,14 @@ author: Sky
 
 
 ## 链表 ##
-
-`// Definition for singly-linked list.
-
+~~~
+// Definition for singly-linked list.
   	public class ListNode {
-
    		int val;
-
- 		  ListNode next;
-
-  		  ListNode(int x) { val = x; }
-
-  	}`
+ 		ListNode next;
+  		ListNode(int x) { val = x; }
+  	}
+~~~
 
 ### 删除链表倒数第N个节点 ###
 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
@@ -66,41 +62,21 @@ author: Sky
 
 ~~~
 class Solution {
-
   public ListNode removeNthFromEnd(ListNode head, int n) {
-
 ​    ListNode dummy = new ListNode(0);
-
 ​    dummy.next = head;
-
 ​    ListNode first = dummy;
-
 ​    ListNode second = dummy;
-
 ​    for(int i = 0; i < n; i++){
-
 ​      first = first.next;
-
 ​    }
-
-
-
 ​    while(first.next!= null){
-
 ​      first= first.next;
-
 ​      second = second.next;
-
 ​    }
-
 ​    second.next = second.next.next;
-
 ​    return dummy.next;
-
   }
-
-
-
 }
 ~~~
 
