@@ -18,9 +18,51 @@ author: Sky
 ## 矩阵 ##
 
 ### 旋转矩阵
+给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
+**不占用额外内存空间能否做到？**
+**示例 :**
+给定 matrix = 
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+],
+原地旋转输入矩阵，使其变为:
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]
+]
 
+**思路：**
+任意子矩阵/矩阵可以用左上角和右下角坐标唯一确定。根据此思想可以按圈操作旋转。
 
+~~~
+class Solution {
+    public void rotate(int[][] matrix) {
+        int tR = 0;
+        int tC = 0;
+        int dR = matrix.length -1;
+        int dC = dR;
+        while(tR<dR){
+            rotateEdge(matrix, tR++, tC++, dR--, dC--);
+        }
+    }
+    
+    public void rotateEdge(int[][] matrix, int tR, int tC, int dR, int dC) {
+        int times = dR - tR;
+        for(int i = 0; i<times;i++){  
+            int temp = matrix[dR-i][tC];
+            matrix[dR-i][tC] =  matrix[dR][dC-i];
+            matrix[dR][dC-i] = matrix[tR+i][dC];
+            matrix[tR+i][dC] = matrix[tR][tC+i];
+            matrix[tR][tC+i] = temp;
+        }
 
+    }
+
+}
+~~~
 
 
 ## 链表 ##
@@ -67,10 +109,10 @@ class Solution {
 ​    dummy.next = head;
 ​    ListNode first = dummy;
 ​    ListNode second = dummy;
-​    for(int i = 0; i < n; i++){
+​    for(int i = 0; i < n; i++){//这里先走多少步需要扣一下细节
 ​      first = first.next;
 ​    }
-​    while(first.next!= null){
+​    while(first.next!= null){//需要和上面一起抠细节
 ​      first= first.next;
 ​      second = second.next;
 ​    }
@@ -80,9 +122,41 @@ class Solution {
 }
 ~~~
 
+## 二叉树  ##
+### 二叉树的镜像 ###
+请完成一个函数，输入一个二叉树，该函数输出它的镜像。**即：**左右子树互换。
 
-
-
+**思路：**
+很容易想到递归方法，同样也能改成非递归，可以借鉴二叉树先序遍历的非递归的方法。
+递归版：
+~~~
+public TreeNode mirrorTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        } 
+        TreeNode tmp = root.left;
+        root.left = mirrorTree(root.right);
+        root.right = mirrorTree(tmp);
+        return root;
+     }
+~~~
+非递归版：使用栈，先把头节点压入。循环弹出栈，压入左右子节点，并互换。
+~~~
+    public TreeNode mirrorTree(TreeNode root) {
+        if (root == null ) return null;
+      Stack<TreeNode> stack = new Stack<>();
+      stack.add(root);
+      while(!stack.isEmpty()){
+          TreeNode curr = stack.pop();
+          if(curr.left!=null) stack.add(curr.left);
+          if(curr.right!=null) stack.add(curr.right);
+          TreeNode tmp = curr.left;
+          curr.left = curr.right;
+          curr.right = tmp;
+      }
+      return root;
+    }
+~~~
 
 
 
