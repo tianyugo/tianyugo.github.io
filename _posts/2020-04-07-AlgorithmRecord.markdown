@@ -13,7 +13,7 @@ author: Sky
 {:toc}
 
 ## 前言 ##
-算法题目笔记，记录一下子。
+算法题目笔记，记录一下子，来自于leetcode。
 
 ## 矩阵 ##
 
@@ -37,7 +37,7 @@ author: Sky
 **思路：**
 任意子矩阵/矩阵可以用左上角和右下角坐标唯一确定。根据此思想可以按圈操作旋转。
 
-~~~
+~~~java
 class Solution {
     public void rotate(int[][] matrix) {
         int tR = 0;
@@ -64,9 +64,48 @@ class Solution {
 }
 ~~~
 
+### 机器人的运动范围（dfs）
+
+地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+
+**思路：**简单分析过后，会发现会存在机器人不可达的满足k的区域。
+
+ **各位求和子函数**sumAdd()，如下：
+
+```java
+public int sumAdd(int x){
+    int s = 0;
+    while (x != 0){
+        s += x % 10;
+        x = x / 10;
+    }
+    return s;
+}
+```
+
+ 采用暴力递归，越界||不满足k||已访问过：格子0，否则格子+1。
+
+~~~java
+public int movingCount(int m, int n, int k) {
+    boolean[][] visited = new boolean[m][n];
+    return dfs(0,0,m,n,k,visited);
+}
+
+  public int dfs(int x,int y,int m, int n, int k, boolean[][] visited){ 
+      if( x >= m || y >= n || sumAdd(x)+sumAdd(y) > k || visited[x][y]) return 0;
+      visited[x][y] = true;
+      return 1+dfs(x+1,y,m,n,k,visited)+dfs(x,y+1,m,n,k,visited)
+  }
+
+
+
+~~~
+
+ 
 
 ## 链表 ##
-~~~
+
+~~~java
 // Definition for singly-linked list.
   	public class ListNode {
    		int val;
@@ -102,7 +141,7 @@ class Solution {
 
 方法二：两个指针，让一个先走N，那么他们的距离相差为N。然后两个指针同步.Next，先走的到达链尾，后走的就是相距为N的倒数第N个节点。
 
-~~~
+~~~java
 class Solution {
   public ListNode removeNthFromEnd(ListNode head, int n) {
 ​    ListNode dummy = new ListNode(0);
@@ -129,7 +168,7 @@ class Solution {
 **思路：**
 很容易想到递归方法，同样也能改成非递归，可以借鉴二叉树先序遍历的非递归的方法。
 递归版：
-~~~
+~~~java
 public TreeNode mirrorTree(TreeNode root) {
         if (root == null) {
             return null;
@@ -141,7 +180,7 @@ public TreeNode mirrorTree(TreeNode root) {
      }
 ~~~
 非递归版：使用栈，先把头节点压入。循环弹出栈，压入左右子节点，并互换。
-~~~
+~~~java
     public TreeNode mirrorTree(TreeNode root) {
         if (root == null ) return null;
       Stack<TreeNode> stack = new Stack<>();
@@ -168,9 +207,20 @@ public TreeNode mirrorTree(TreeNode root) {
 
 
 
+## 常用子程序
 
+### 各位求和
 
-
+~~~java
+public int sumAdd(int x){
+    int s = 0;
+    while (x != 0){
+        s += x % 10;
+        x = x / 10;
+    }
+    return s;
+}
+~~~
 
 
 
