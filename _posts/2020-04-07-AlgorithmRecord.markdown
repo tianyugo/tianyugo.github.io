@@ -167,7 +167,8 @@ class Solution {
 
 **思路：**
 很容易想到递归方法，同样也能改成非递归，可以借鉴二叉树先序遍历的非递归的方法。
-递归版：
+**递归版：**
+
 ~~~java
 public TreeNode mirrorTree(TreeNode root) {
         if (root == null) {
@@ -179,7 +180,8 @@ public TreeNode mirrorTree(TreeNode root) {
         return root;
      }
 ~~~
-非递归版：使用栈，先把头节点压入。循环弹出栈，压入左右子节点，并互换。
+**非递归版：**使用栈，先把头节点压入。循环弹出栈，压入左右子节点，并互换。
+
 ~~~java
     public TreeNode mirrorTree(TreeNode root) {
         if (root == null ) return null;
@@ -201,11 +203,48 @@ public TreeNode mirrorTree(TreeNode root) {
 
 
 
+## 递归与动态规划
+
+### 括号生成
+
+数字 *n* 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合
+
+**示例：**
+
+​	**输入：**n = 3
+​	**输出**：[
+​       "((()))",
+​       "(()())",
+​       "(())()",
+​       "()(())",
+​       "()()()"
+​     ]
 
 
 
+**思路：**考虑当前左右括号数，都为零则说明已生成有效括号组合：加入输出中。若左括号数>0，则还可以加入左括号，
 
+~~~java
+List<String> res = new ArrayList<>();
+  public List<String> generateParenthesis(int n) {
+​    dfs(n,n,"");
+​    return res;
+  }
+  public void dfs(int left, int right, String cur){
+​    if(left == 0 && right == 0){// 左右括号都不剩余了，递归终止
+​      res.add(cur);
+​      return;
+​    }
+​    if(left > 0){// 如果左括号还剩余的话，可以拼接左括号
+​      dfs(left-1, right, cur+"(");
+​    }
+​    if(left < right){// 如果右括号剩余多于左括号剩余的话，可以拼接右括号
+​      dfs(left, right-1, cur+")");
+​    }
+  }
+~~~
 
+  
 
 ## 常用子程序
 
