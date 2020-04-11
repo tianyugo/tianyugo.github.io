@@ -161,7 +161,49 @@ class Solution {
 }
 ~~~
 
+## 字符串
+
+#### [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+
+给定一个字符串，逐个翻转字符串中的每个单词。
+
+**示例 2：**
+
+输入: "  hello world!  "
+输出: "world! hello"
+解释: 输入字符串可以**在前面或者后面包含多余的空格**，但是反转后的字符不能包括。
+
+**示例 ：**
+
+输入: "a good   example"
+输出: "example good a"
+解释: 如果**两个单词间有多余的空格**，将反转后单词间的空格减少到只含一个。
+
+~~~java
+public String reverseWords(String s){
+    // 除去开头和末尾的空白字符    
+    s = s.trim();// Java String无法修改，.strim()生成的是新字符串，并不是修改s。
+    //分割字符串
+    List<String> wordList = Arrays.asList(s.split("\\s+"));// 正则匹配连续的空白字符作为分隔符分割
+    Collections.reverse(wordList);// 反转 list，所以需要将上述String数组，转换为List
+    return String.join(" ", wordList);//jdk 1.8 以后，新API
+}
+
+~~~
+
+**说明：**
+
+~~~java
+//.split()用法	
+     String str = "you can you up";
+	 String[] str1 = str.split(" ");
+	     .split("\\s+");
+//Collections.reverse(List<?> list ) 反转list集合
+	Collections.reverse(wordList);
+~~~
+
 ## 二叉树  ##
+
 ### 二叉树的镜像 ###
 请完成一个函数，输入一个二叉树，该函数输出它的镜像。**即：**左右子树互换。
 
@@ -246,7 +288,7 @@ List<String> res = new ArrayList<>();
 
   
 
-## 常用子程序
+## 常用API
 
 ### 各位求和
 
@@ -261,11 +303,53 @@ public int sumAdd(int x){
 }
 ~~~
 
+### 字符串相关
+
+1. 除去开头和末尾的空白字符 ——s = s.trim();
+
+~~~java
+s = s.trim();// Java String无法修改，.strim()生成的是新字符串，并不是修改s。
+~~~
+
+2. 分割字符串——String[] str1 = s.split(" ");
+
+~~~java
+String str = "you can you up";
+String[] str1 =str.split(" ")
+~~~
+
+2.*若存在多个空格符——String[] str2 = str.split("\\s+");
+
+~~~java
+String str = "you      can you up";
+String[] str2 = str.split("\\s+");
+	     
+~~~
+
+3.字符串变成整型——int a = Integer.valueOf(str);
+
+~~~java
+String str="888";
+int a=Integer.valueOf(str)
+~~~
+
+4.***变成字符串（String.valueOf）——
+
+~~~java
+char c[]={'a','b','c','d','e','f'};
+int n=2011;
+String s1=String.valueOf(c);    //字符或字符数组均可转换
+String s2=String.valueOf(c,2,4);
+String s3=String.valueOf(n);
+~~~
 
 
 
+xx对象.toString();必须先创建对象，再调用对象的toString()方法
 
+String.valueOf(XX对象):静态方法，不需要创建任何对象，就可以直接调用
 
+大多数valueOf方法调用的都是toString()方法，建议大家用valueOf方法，因为valueOf在没有对象也可以用，可以避免空指针异常
 
 ----
 
