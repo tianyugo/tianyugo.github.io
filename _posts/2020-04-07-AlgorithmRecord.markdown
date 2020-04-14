@@ -163,7 +163,7 @@ class Solution {
 
 ## 字符串
 
-#### [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+### [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
 
 给定一个字符串，逐个翻转字符串中的每个单词。
 
@@ -202,7 +202,68 @@ public String reverseWords(String s){
 	Collections.reverse(wordList);
 ~~~
 
+### 字符串转换整数 (atoi)
+
+**方法一**：字符串转换
+
+考验硬功底，底子不硬照抄来的。
+
+~~~java
+class Solution {
+    public int myAtoi(String str) {
+        str = str.trim();
+        if (str.length() == 0) return 0;
+        if (!Character.isDigit(str.charAt(0))
+            && str.charAt(0) != '-' && str.charAt(0) != '+')
+            return 0;
+        long ans = 0L;
+        boolean neg = str.charAt(0) == '-';
+        int i = !Character.isDigit(str.charAt(0)) ? 1 : 0;
+        while (i < str.length() && Character.isDigit(str.charAt(i))) {
+            ans = ans * 10 + (str.charAt(i++) - '0');
+            if (!neg && ans > Integer.MAX_VALUE) {
+                ans = Integer.MAX_VALUE;
+                break;
+            }
+            if (neg && ans > 1L + Integer.MAX_VALUE) {
+                ans = 1L + Integer.MAX_VALUE;
+                break;
+            }
+        }
+        return neg ? (int) -ans : (int) ans;
+    }
+}
+~~~
+
+**方法二**：自动机
+
+概念：我们的程序在每个时刻有一个状态 s，每次从序列中输入一个字符 c，并根据字符 c 转移到下一个状态 s'。这样，我们只需要建立一个覆盖所有情况的从 s 与 c 映射到 s' 的表格即可解决题目中的问题。
+
+可以建立如下图所示的自动机：
+
+![fig1](https://assets.leetcode-cn.com/solution-static/8_fig1.PNG)
+
+也可以用下面的表格来表示这个自动机：
+
+' '	+/-	number	other
+start	start	signed	in_number	end
+signed	end	end	in_number	end
+in_number	end	end	in_number	end
+end	end	end	end	end
+
 ## 二叉树  ##
+
+~~~java
+
+ // Definition for a binary tree node.
+  public class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+  }
+ 
+~~~
 
 ### 二叉树的镜像 ###
 请完成一个函数，输入一个二叉树，该函数输出它的镜像。**即：**左右子树互换。
@@ -238,6 +299,49 @@ public TreeNode mirrorTree(TreeNode root) {
           curr.right = tmp;
       }
       return root;
+    }
+~~~
+
+
+
+### 二叉树的层序遍历
+
+从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+
+例如:
+给定二叉树: [3,9,20,null,null,15,7],
+
+```java
+  3
+ / \
+9  20
+   /  \
+  15   7
+返回：
+   [3,9,20,15,7]
+```
+**思路：**队列实现，将树的节点放入队列中，弹出时打印值并将左右子节点（检查是否存在）加入队列。队列先进先出good！！
+
+~~~java
+ public int[] levelOrder(TreeNode root) {
+        Queue<TreeNode> que = new LinkedList<>();//队列实现使用双向链表
+        ArrayList<Integer> arr = new ArrayList<>();
+        if(root!=null){
+            que.add(root);  
+        }else{    	//别忘了处理空树
+            return new int[]{};
+            }
+        while(!que.isEmpty()){
+            TreeNode cur = que.poll();//队列弹出头部推荐用poll，不会有异常
+            arr.add(cur.val);
+            if(cur.left != null) que.offer(cur.left);//队列加入用offer
+            if(cur.right != null) que.offer(cur.right);
+        }						//使用.size
+        int[] ans = new int[arr.size()]; //ArrayList→Array 输出结果 
+        for (int i =0 ; i < arr.size(); i++){
+            ans[i] = arr.get(i);
+        }
+        return ans;
     }
 ~~~
 
@@ -350,6 +454,87 @@ xx对象.toString();必须先创建对象，再调用对象的toString()方法
 String.valueOf(XX对象):静态方法，不需要创建任何对象，就可以直接调用
 
 大多数valueOf方法调用的都是toString()方法，建议大家用valueOf方法，因为valueOf在没有对象也可以用，可以避免空指针异常
+
+
+
+
+
+### 数据结构相关
+
+#### 栈Stack ：Stack
+
+~~~java
+//初始化
+   Stack stack=new Stack();
+//判断是否为空
+   stack.empty();
+//取栈顶值（不出栈）
+   stack.peek();
+//进栈
+   stack.push(Object);
+//出栈
+   stack.pop();
+~~~
+
+#### 队列Queue： LinkedList
+
+```java
+//1.初始化
+	Queue<TreeNode> queue = new LinkedList<>(){{ add(root); }};
+//2.添加元素
+    queue.offer("a");//add
+//3.删除第一个
+    queue.poll();//remove
+//4.返回头部
+    queue.peek();//element
+```
+
+#### 动态数组ArrayList：ArrayList
+
+```java
+ArrayList<Integer> ans = new ArrayList<>();
+ans.add();
+ans.get();
+size() : 获取集合长度，通过定义在ArrayList中的私有变量size得到
+isEmpty()：是否为空，通过定义在ArrayList中的私有变量size得到
+contains(Object o)：是否包含某个元素，通过遍历底层数组elementData，通过equals或==进行判断
+    //
+            Object[] array = arrayList.toArray();
+
+
+            String[] array = (String[])ans.toArray(new String[size]);  
+
+```
+
+#### 数组Array: int[] 
+
+~~~java
+int[] ans = new int[n];
+//
+ List<String> list=Arrays.asList(array); 
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ----
 
