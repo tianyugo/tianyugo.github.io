@@ -392,7 +392,126 @@ List<String> res = new ArrayList<>();
 
   
 
+## 其他
+
+### 有效的括号（遍历字符串）
+
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+有效字符串需满足：
+
+1	左括号必须用相同类型的右括号闭合。
+2	左括号必须以正确的顺序闭合。
+
+*注意空字符串可被认为是有效字符串。
+
+**思路：**利用栈结构，遇到左括号加入栈，遇到右括号弹出栈顶并检查是否是一组。检查是否是一组的对应关系可用HashMap的K-V关系表示。但也可以不用map结构，思路如下：遍历字符串：遇到左括号，压入对应的右括号；遇到右括号，检查栈顶是否是相同的，相同则检查字符串中下一个字符，不相同或者栈空了，返回false。遍历完字符串最后检查栈，为空则true，否则false。
+
+~~~java
+public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (Character cur : s.toCharArray()){
+            if(cur =='('){
+                stack.push(')');
+            }else if(cur == '{'){
+                stack.push('}');
+            }else if(cur == '['){
+                stack.push(']');
+            }else if(stack.empty() || cur != stack.pop()){
+                return false;
+            }
+        }
+        if(stack.empty())  return true;
+        return false;     
+    }
+~~~
+
+### 合并区间: [1,3]+[2,6]=[1,6]
+
+给出一个区间的集合，请合并所有重叠的区间。
+
+示例 1:
+
+输入: [[1,3],[2,6],[8,10],[15,18]]
+输出: [[1,6],[8,10],[15,18]]
+解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+示例 2:
+
+输入: [[1,4],[4,5]]
+输出: [[1,5]]
+解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
+
+~~~java
+   public int[][] merge(int[][] intervals) {
+        // 先按照区间起始位置排序
+        Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+        // 遍历区间
+        int[][] res = new int[intervals.length][2];
+        int idx = -1;
+        for (int[] interval: intervals) {
+            // 如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
+            // 则不合并，直接将当前区间加入结果数组。
+            if (idx == -1 || interval[0] > res[idx][1]) {
+                res[++idx] = interval;
+            } else {
+                // 反之将当前区间合并至结果数组的最后区间
+                res[idx][1] = Math.max(res[idx][1], interval[1]);
+            }
+        }
+        return Arrays.copyOf(res, idx + 1);
+    }
+~~~
+
+
+
+
+
 ## 常用API
+
+### I/O
+
+首行数字N，N行String
+
+2
+helloo
+wooooooow
+
+##### BufferedReade
+
+~~~java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(bf.readLine());//Integer.parseInt(),将括号内容转换为int
+        while ((n--) > 0) {
+            String s = bf.readLine();
+            char[] array = s.toCharArray();
+~~~
+
+##### Scanner
+
+~~~java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int line = scanner.nextInt();
+        scanner.nextLine();//warning 需要删除首行int 末尾的换行符
+        for (int i = 0; i < line; i++) {
+            System.out.println(scanner.nextLine().replaceAll("(.)\\1+","$1$1").replaceAll("(.)\\1(.)\\2","$1$1$2"));
+        }
+    }
+}
+~~~
+
+
+
+
 
 ### 各位求和
 
@@ -408,6 +527,8 @@ public int sumAdd(int x){
 ~~~
 
 ### 字符串相关
+
+#### String
 
 1. 除去开头和末尾的空白字符 ——s = s.trim();
 
@@ -447,15 +568,21 @@ String s2=String.valueOf(c,2,4);
 String s3=String.valueOf(n);
 ~~~
 
-
-
 xx对象.toString();必须先创建对象，再调用对象的toString()方法
 
 String.valueOf(XX对象):静态方法，不需要创建任何对象，就可以直接调用
 
 大多数valueOf方法调用的都是toString()方法，建议大家用valueOf方法，因为valueOf在没有对象也可以用，可以避免空指针异常
 
+#### StringBuilder
 
+[StringBuilder的常用方法](https://www.cnblogs.com/jack-Leo/p/6684447.html)
+
+```java
+StringBuilder sb = new StringBuilder();
+sb.append(array[0]);
+sb.toString()//转换为str
+```
 
 
 
@@ -498,11 +625,9 @@ ans.get();
 size() : 获取集合长度，通过定义在ArrayList中的私有变量size得到
 isEmpty()：是否为空，通过定义在ArrayList中的私有变量size得到
 contains(Object o)：是否包含某个元素，通过遍历底层数组elementData，通过equals或==进行判断
-    //
-            Object[] array = arrayList.toArray();
-
-
-            String[] array = (String[])ans.toArray(new String[size]);  
+ 
+Object[] array = arrayList.toArray();
+String[] array = (String[])ans.toArray(new String[size]);  
 
 ```
 
@@ -514,6 +639,7 @@ int[] ans = new int[n];
  List<String> list=Arrays.asList(array); 
 ~~~
 
+#### 哈希表HashMap
 
 
 
@@ -521,22 +647,133 @@ int[] ans = new int[n];
 
 
 
+###  [Collections 工具类和 Arrays 工具类常见方法](https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/basic/Arrays,CollectionsCommonMethods.md)
+
+####  Collections
+
+#####  排序操作
+
+```java
+void reverse(List list)//反转
+void shuffle(List list)//随机排序
+void sort(List list)//按自然排序的升序排序
+void sort(List list, Comparator c)//定制排序，由Comparator控制排序逻辑
+void swap(List list, int i , int j)//交换两个索引位置的元素
+void rotate(List list, int distance)//旋转。当distance为正数时，将list后distance个元素整体移到前面。当distance为负数时，将 list的前distance个元素整体移到后面。
+```
+
+```java
+// 定制排序的用法
+		Collections.sort(arrayList, new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2.compareTo(o1);
+			}
+		});
+```
 
 
 
+#####  查找,替换操作
 
-
-
-
-
-
-
-
-
-
-
+```java
+int binarySearch(List list, Object key)//对List进行二分查找，返回索引，注意List必须是有序的
+int max(Collection coll)//根据元素的自然顺序，返回最大的元素。 类比int min(Collection coll)
+int max(Collection coll, Comparator c)//根据定制排序，返回最大元素，排序规则由Comparatator类控制。类比int min(Collection coll, Comparator c)
+void fill(List list, Object obj)//用指定的元素代替指定list中的所有元素。
+int frequency(Collection c, Object o)//统计元素出现次数
+int indexOfSubList(List list, List target)//统计target在list中第一次出现的索引，找不到则返回-1，类比int lastIndexOfSubList(List source, list target).
+boolean replaceAll(List list, Object oldVal, Object newVal), 用新元素替换旧元素
+```
 
 ----
+
+####  Arrays类的常见操作
+
+##### 排序 :  Arrays.sort(array)
+
+~~~java
+
+Arrays.sort(a);
+	Arrays.sort(b, 2, 6);
+Arrays.parallelSort(c);
+
+
+~~~
+
+##### 查找 : Arrays.binarySearch(array，？)
+
+```java
+	// *************查找 binarySearch()****************
+	char[] e = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
+	// 排序后再进行二分查找，否则找不到
+	Arrays.sort(e);
+	System.out.println("Arrays.sort(e)" + Arrays.toString(e));
+	System.out.println("Arrays.binarySearch(e, 'c')：");
+	int s = Arrays.binarySearch(e, 'c');
+	System.out.println("字符c在数组的位置：" + s);
+```
+#####  比较: Arrays.equals(arr,arr)
+
+```java
+		// *************比较 equals****************
+		char[] e = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
+		char[] f = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
+		/*
+		* 元素数量相同，并且相同位置的元素相同。 另外，如果两个数组引用都是null，则它们被认为是相等的 。
+		*/
+		// 输出true
+		System.out.println("Arrays.equals(e, f):" + Arrays.equals(e, f));
+```
+
+#####  填充 : Arrays.fill(arr,?)
+
+```java
+		int[] h = { 1, 2, 3, 3, 3, 3, 6, 6, 6, };
+		// 数组中指定范围元素重新分配值
+		Arrays.fill(h, 0, 2, 9);//[0-2]  9
+		System.out.println("Arrays.fill(h, 0, 2, 9);：");
+		// 输出结果：993333666
+		for (int i : h) {
+			System.out.print(i);
+		}
+```
+
+#####  转字符串:Arrays.toString(k)
+
+```java
+		// *************转字符串 toString()****************
+		/*
+		* 返回指定数组的内容的字符串表示形式。
+		*/
+		char[] k = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
+		System.out.println(Arrays.toString(k));// [a, f, b, c, e, A, C, B]
+```
+
+#####  复制: Arrays.copyOf(arr,n)
+
+```java
+		// *************复制 copy****************
+		// copyOf 方法实现数组复制,h为数组，6为复制的长度
+		int[] h = { 1, 2, 3, 3, 3, 3, 6, 6, 6, };
+		int i[] = Arrays.copyOf(h, 6);
+		System.out.println("Arrays.copyOf(h, 6);：");
+		// 输出结果：123333
+		for (int j : i) {
+			System.out.print(j);
+		}
+```
+
+
+
+
+
+
+
+
+
+
 
 2020年4月8日 10点38分
 
