@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "数据结构算法题笔记"
+title:  "Java关键知识记录"
 date:   2020/04/08 10点33分        
 categories: me 
-tags: code
-excerpt: leetcode题目笔记
+tags: java
+excerpt: 学习过程中记录下好的学习资源，方便自己复习
 mathjax: true
 author: Sky
 ---
@@ -13,7 +13,7 @@ author: Sky
 {:toc}
 
 ## 前言 ##
-学习过程中记录好的学习资源。
+学习过程中记录好的学习资源，方便自己复习。
 
 ## 记录
 
