@@ -691,13 +691,21 @@ boolean replaceAll(List list, Object oldVal, Object newVal), 用新元素替换�
 
 ####  Arrays类的常见操作
 
-##### 排序 :  Arrays.sort(array)
+import java.util.Arrays;
+
+##### 排序 :  Arrays.sort(array)/最小值
 
 ~~~java
 
 Arrays.sort(a);
 	Arrays.sort(b, 2, 6);
 Arrays.parallelSort(c);
+
+//最小值：先排序
+ 	Arrays.sort(arr);
+ 	arr[0]
+//或者使用
+     Collections.min(Arrays.asList(cm));
 
 
 ~~~
