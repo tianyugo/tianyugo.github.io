@@ -15,7 +15,277 @@ author: Sky
 ## 前言 ##
 算法题目笔记，记录一下子，来自于leetcode。
 
-## 矩阵 ##
+## **排序**
+
+### 归并排序（稳定） O(nlogn)
+
+mergeSort{
+
+​	mergeSort(l,mid)
+
+​	mergeSort(mid,r)
+
+​	merge(l,m,r)
+
+}
+
+
+
+#### 数组：空间复杂度O(n) —help数组
+
+~~~java
+public static void mergeSort1(int[] arr, int l, int r) {
+		if (l == r) {
+			return;
+		}
+		int mid = l + ((r - l) >> 1);
+		mergeSort1(arr, l, mid);
+		mergeSort1(arr, mid + 1, r);
+		merge1(arr, l, mid, r);
+
+	}
+
+	public static void merge1(int[] arr, int l, int m, int r) {
+		int[] help = new int[r - l + 1];//空间复杂度
+		int p1 = l;
+		int p2 = m + 1;
+		int i = 0;
+		while (p1 <= m && p2 <= r) {
+			help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+		}
+		while(p1 <= m){
+			help[i++] =arr[p1++];
+		}
+		while(p2 <= r){
+			help[i++] =arr[p2++];
+		}
+		for (int j = 0; j < help.length; j++) {
+			arr[l+j] = help[j];
+		}
+	}
+
+~~~
+
+
+
+#### 链表：空间复杂度O(1)
+
+~~~java
+ public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+     
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+     
+        ListNode  mid = slow.next ;//使用上述快慢指针，计算链表中点
+        slow.next = null;		//注意分链
+        ListNode left = sortList(head);
+        ListNode right =sortList(mid);
+        return mergeList(left,right);
+    }
+    public ListNode mergeList(ListNode head1, ListNode head2){
+        ListNode help = new ListNode(0);
+        ListNode helpHead = help;
+        while(head1 != null && head2 != null){
+            if(head1.val < head2.val){
+                help.next = head1;
+                head1 = head1.next;
+            }else{
+                help.next = head2;
+                head2 = head2.next;
+            }
+            help = help.next;
+
+        }
+        help.next = head1 != null ? head1 : head2;
+        
+
+        return helpHead.next;
+    }
+~~~
+
+
+
+###  快速排序（不稳定） O(nlogn)
+
+> quickSort{
+>
+> ​	partition 分成  “<”  "=“  ”>" 三部分，
+>
+> ​	然后quickSort"<",">";
+>
+> }
+
+
+
+#### 数组
+
+~~~java
+	public static void quickSort(int[] arr, int l, int r) {
+		if (l < r) {// 关键
+			int[] ans = partition(arr, l, r);
+			quickSort(arr, l, ans[0] - 1);
+			quickSort(arr, ans[1] + 1, r);
+		}
+	}	
+	public static int[] partition(int[] arr, int l, int r) {
+		int less = l - 1;
+		int more = r + 1;
+		int num = arr[r];
+		int cur = l;
+		while (cur < more) {
+			if (arr[cur] < num) {
+				swap(arr, ++less, cur);
+				cur++;
+			} else if (arr[cur] > num) {
+				swap(arr, --more, cur);
+				// cur位置还需要判断
+			} else {// ==num
+				cur++;
+			}
+		}
+		return new int[] { less + 1, more - 1 };
+	}
+
+	private static void swap(int[] arr, int i, int cur) {
+		int tmp = arr[i];
+		arr[i] = arr[cur];
+		arr[cur] = tmp;
+	}
+~~~
+
+
+
+#### 链表
+
+partition ：新建两个头节点，按. val接成    list左，list右，再接上。
+
+~~~java
+public class Solution {
+    public ListNode sortList(ListNode head) {
+        return quickSort(head);
+    }
+
+    ListNode quickSort(ListNode head){
+        if(head == null || head.next == null) return head;
+        
+        int pivot = head.val;
+        // 链表划分
+        ListNode ls = new ListNode(-1), rs = new ListNode(-1);
+        ListNode l = ls, r = rs, cur = head;
+        
+        while(cur != null){
+            if(cur.val < pivot){
+                l.next = cur;
+                l = l.next;
+            }else{
+                r.next = cur;
+                r = r.next;
+            }
+            cur = cur.next;
+        }
+        l.next = rs.next;
+        r.next = null;
+        
+        // 递归调用,先重排右边的,再把指针置空,再重排左边的
+        // 和归并排序很像的
+        ListNode right = quickSort(head.next);//head 在右头
+        head.next = null;
+        ListNode left = quickSort(ls.next);
+        
+        // 拼接左半部分和右半部分
+        cur = left;
+        while(cur.next != null){
+            cur = cur.next;
+        }
+        cur.next = right;
+        return left;
+        
+    }
+}
+~~~
+
+
+
+## 栈
+
+### [155. 最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+~~~java
+    Stack<Integer> dataStack;
+	Stack<Integer> minStack;
+	    /** initialize your data structure here. */
+	    public MinStack() {
+	    	this.dataStack = new Stack<Integer>();
+	    	this.minStack = new Stack<Integer>();
+	    }   
+	    public void push(int x) {
+	    	this.dataStack.push(x);
+	    	if(minStack.isEmpty() || minStack.peek() >= x ){
+	    		minStack.push(x);
+	    	}else{
+                Integer a = minStack.peek();
+	    		minStack.push(a);
+	    	}
+	    }
+	    
+	    public void pop() {	    	
+	    		this.dataStack.pop();
+		    	this.minStack.pop();   	
+	    }
+	    
+	    public int top() {
+	    	return this.dataStack.peek();
+	    }
+	    
+	    public int getMin() {
+	    	return this.minStack.peek();
+	    }
+~~~
+
+
+
+## 矩阵与数组 ##
+
+### [229. 求众数 II](https://leetcode-cn.com/problems/majority-element-ii/)
+
+1使用额外空间 hashmap实现
+
+掌握知识：遍历map方法，map的增删改查
+
+~~~java
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int n = nums.length;
+        int up = n/3;
+        Map<Integer, Integer>  map = new HashMap<>();
+        Integer size = 0;
+        for(int i = 0 ;i<n;i++){
+            size = map.get(nums[i]);
+            if(size == null){
+                map.put(nums[i], 1);
+            }else{
+                map.replace(nums[i], size+1);
+            }
+        }
+
+        List<Integer> list = new ArrayList<>();
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            if(entry.getValue() > up){
+                 list.add(entry.getKey());
+             }
+        }
+        return list;
+    }
+}
+~~~
+
+2.摩尔投票法：时间O(N), 空间：O(1)
 
 ### 旋转矩阵
 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
@@ -114,7 +384,46 @@ public int movingCount(int m, int n, int k) {
   	}
 ~~~
 
+### 无环相交链表
+
+
+
+**思路1：**走完A，得length_A，走完B，得length_B,得到length差，长得那个先走length差，检测遇没遇到。
+
+
+
+
+
+**思路2：**一个走A+B，一个走B+A,一定会相遇
+
+![](https://pic.leetcode-cn.com/f609a6d15a3005d7f4f75198360dbcba9ef08ac8b2f9bdc629ebc5dcb1113401-image.png)
+
+
+
+~~~java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA ==null | headB == null)return null;
+        ListNode cura = headA;
+        ListNode curb = headB;
+        
+        while(cura != curb){
+            cura = cura == null? headB:cura.next;
+            curb = curb == null? headA:curb.next;
+        }
+        return cura;
+    }
+}
+~~~
+
+
+
+
+
+
+
 ### 删除链表倒数第N个节点 ###
+
 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
 
 **示例：**
@@ -161,6 +470,51 @@ class Solution {
 }
 ~~~
 
+###   [旋转链表](https://leetcode-cn.com/problems/rotate-list/)
+
+输入: 1->2->3->4->5->NULL, k = 2
+输出: 4->5->1->2->3->NULL
+解释:
+向右旋转 1 步: 5->1->2->3->4->NULL
+向右旋转 2 步: 4->5->1->2->3->NUL
+
+> **思路：**受链表倒数第N个节点求解方法的启发，分析题意后找到倒数第n个节点作为**`newHead`**，上一个（倒数第n-个）.next指向null。
+
+> 没有考虑 `k>listLength` 的情况，该情况会导致遍历完一遍链表，最后超出范围。使用`k % listLength`处理
+>
+> 没有考虑 `k==0`，该情况会导致找不到倒数第0个，应该返回head
+
+~~~java
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null)return head;
+        ListNode first = head;
+        ListNode second = head; 
+        int listLength = 1;
+        ListNode test = head;
+        while(test.next!=null){
+            test = test.next;
+            listLength++;
+        }
+        k = k % listLength;
+        if(k==0)return head;//k为非负
+        for(int i = 0; i < k;i++){
+            first = first.next;
+        }
+        while(first.next != null){
+            first = first.next;
+            second = second.next;
+        }
+        ListNode newHead = second.next;
+        first.next = head;
+        second.next = null;
+        return newHead;
+    }
+~~~
+
+
+
+
+
 ## 字符串
 
 ### [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
@@ -201,6 +555,50 @@ public String reverseWords(String s){
 //Collections.reverse(List<?> list ) 反转list集合
 	Collections.reverse(wordList);
 ~~~
+
+### [43.字符串相乘](https://leetcode-cn.com/problems/multiply-strings/)
+
+自己实现一个乘法，**不能使用任何标准库的大数类型（比如 BigInteger）**或**直接将输入转换为整数来处理**。
+
+**思路：**因此实现需要每一位相乘
+
+实际上每一位乘完相加可以是一个两位数，甚至三位数，最后进位操作也可以。没有必要乘完每一位，
+
+细节比如：字符串比较用.equals
+
+~~~java
+    public String multiply(String num1, String num2) {
+		// int a=Integer.valueOf(num1);
+		// int b=Integer.valueOf(num2);
+		// return Integer.toString(a*b);
+		if (num1.equals("0") | num2.equals("0"))//字符串比较用.equals
+			return "0";
+		int anslen = num1.length() + num2.length();//结果的长度不会超过两数的长度和
+		int[] ans = new int[anslen];
+		int mult = 0;
+		for (int i = num1.length() - 1; i >= 0; i--) {
+			for (int j = num2.length() - 1; j >= 0; j--) {
+				ans[i + j + 1] += (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+				if (ans[i + j + 1] >= 10) {//这一位计算完如果>10，需要进位。
+					mult = ans[i + j + 1];
+					ans[i + j + 1] = mult % 10;
+					ans[i + j] += mult / 10;
+				}
+			}
+		}
+		StringBuilder sb = new StringBuilder();//用可变String 存放最终答案
+		boolean flag = false;
+		for (int i = 0; i < anslen; i++) {
+			if (ans[i] != 0 | flag == true) {
+				flag = true;
+				sb.append(ans[i]);
+			}
+		}
+		return sb.toString();
+	}
+~~~
+
+
 
 ### 字符串转换整数 (atoi)
 
@@ -390,9 +788,67 @@ List<String> res = new ArrayList<>();
   }
 ~~~
 
-  
+## 多线程
 
-## 其他
+#### [ 按序打印](https://leetcode-cn.com/problems/print-in-order/)
+
+我们提供了一个类：
+
+public class Foo {
+  public void one() { print("one"); }
+  public void two() { print("two"); }
+  public void three() { print("three"); }
+}
+三个不同的线程将会共用一个 Foo 实例。
+
+线程 A 将会调用 one() 方法
+线程 B 将会调用 two() 方法
+线程 C 将会调用 three() 方法
+
+**请设计修改程序**，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行
+
+￼思路：使用AtomicInteger和自增getAndIncrement()方法，
+
+~~~java
+class Foo {
+        private AtomicInteger firstJobDone = new AtomicInteger(0);
+        private AtomicInteger secondJobDone = new AtomicInteger(0);
+    public Foo() {
+       
+    }
+
+    public void first(Runnable printFirst) throws InterruptedException {
+        
+        // printFirst.run() outputs "first". Do not change or remove this line.
+        printFirst.run();
+        firstJobDone.getAndIncrement();
+    }
+
+    public void second(Runnable printSecond) throws InterruptedException {
+        while(firstJobDone.get() !=1){
+
+        }
+        // printSecond.run() outputs "second". Do not change or remove this line.
+        printSecond.run();
+        secondJobDone.getAndIncrement();
+    }
+
+    public void third(Runnable printThird) throws InterruptedException {
+        while(secondJobDone.get() !=1){
+
+        }
+        // printThird.run() outputs "third". Do not change or remove this line.
+        printThird.run();
+    }
+}
+
+~~~
+
+
+
+## 
+
+
 
 ### 有效的括号（遍历字符串）
 
@@ -476,7 +932,7 @@ public boolean isValid(String s) {
 helloo
 wooooooow
 
-##### BufferedReade
+**BufferedReade**
 
 ~~~java
 import java.io.BufferedReader;
@@ -492,21 +948,21 @@ public class Main {
             char[] array = s.toCharArray();
 ~~~
 
-##### Scanner
+**Scanner**
 
 ~~~java
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int line = scanner.nextInt();
-        scanner.nextLine();//warning 需要删除首行int 末尾的换行符
-        for (int i = 0; i < line; i++) {
-            System.out.println(scanner.nextLine().replaceAll("(.)\\1+","$1$1").replaceAll("(.)\\1(.)\\2","$1$1$2"));
-        }
-    }
-}
+
+        int t = scanner.nextInt();
+        scanner.nextLine();//warning 需要删除首行int 末尾的换行符\n
+		String string = scanner.next();//读取string,直到空格
+//
+//1.nextInt()只会读取数值，剩下"\n"还没有读取，并将cursor放在本行中。
+//2.nextLine()会读取"\n"，并结束（nextLine() reads till the end of line \n）。
+
+
 ~~~
 
 
@@ -524,19 +980,87 @@ public int sumAdd(int x){
     }
     return s;
 }
+
+private int getNext(int n) {
+        int totalSum = 0;
+        while (n > 0) {
+            int d = n % 10;
+            n = n / 10;
+            totalSum += d * d;
+        }
+        return totalSum;
+    }
+
 ~~~
+
+### **长度**
+
+**1.      length：**
+　　是一个 属性
+　　针对的是 数组
+　　得到的结果是 数组的长度
+
+~~~java
+String [] array = {"abc","def","ghi"};
+System.out.println( array.length );
+=====> 3
+~~~
+
+
+
+**2.    length()：**
+　　是一个 方法
+　　针对的是 字符串
+　　获取的是 字符串的长度
+
+~~~java
+　　eg:　　String [] array = {"abc","def","ghi"};
+　　　　　 String s = "abcdef";
+　　　　　 System.out.println( array[0].length() );
+　　　　　 System.out.println( s.length() );
+　　　　　 =====> 3  6
+~~~
+
+
+
+**3.      size()：**
+　　是一个 方法
+　　针对的是 泛型集合
+　　获取的是 集合的元素个数
+
+~~~java
+　eg:　　List<Object> list = new ArrayList();
+　　　　　 list.add("aaa");
+　　　　　 System.out.println( list.size() );
+　　　　　 =====> 1
+~~~
+
+
 
 ### 字符串相关
 
-#### String
+- **Char**
 
-1. 除去开头和末尾的空白字符 ——s = s.trim();
+  1.char转int
 
-~~~java
-s = s.trim();// Java String无法修改，.strim()生成的是新字符串，并不是修改s。
-~~~
+  ~~~java
+  char ch = '9'; if (Character.isDigit(ch)){  // 判断是否是数字 
+      int num = (int)ch - (int)('0'); 
+      System.out.println(num); 
+  }
+  ~~~
 
-2. 分割字符串——String[] str1 = s.split(" ");
+  
+
+- **String**
+
+  1.除去开头和末尾的空白字符 ——s = s.trim();
+
+  ~~~java
+  s = s.trim();// Java String无法修改，.strim()生成的是新字符串，并不是修改s。
+  ~~~
+
+  2.分割字符串——String[] str1 = s.split(" ");
 
 ~~~java
 String str = "you can you up";
@@ -574,7 +1098,7 @@ String.valueOf(XX对象):静态方法，不需要创建任何对象，就可以�
 
 大多数valueOf方法调用的都是toString()方法，建议大家用valueOf方法，因为valueOf在没有对象也可以用，可以避免空指针异常
 
-#### StringBuilder
+- **StringBuilder**
 
 [StringBuilder的常用方法](https://www.cnblogs.com/jack-Leo/p/6684447.html)
 
@@ -639,19 +1163,67 @@ int[] ans = new int[n];
  List<String> list=Arrays.asList(array); 
 ~~~
 
-#### 哈希表HashMap
+#### 哈希表HashSet
+
+~~~java
+
+Set<Integer> hasSet = new HashSet<>();
+hasSet.contains(n);
+hasSet.add(n);
+size();
+
+
+~~~
 
 
 
+​        Map<Integer,Integer> map = new HashMap<>(); 
+
+```java
+Map<String,Integer> map = new HashMap<>(); 
+map.put("1", 1)
+map.get("1")
+map.isEmpty()
+    map.containsKey("DEMO")
+    map.containsValue(1)
+    map.size()
+    map.remove("DEMO2", 2)
+    map.replace("DEMO2", 1)
+   //遍历Map 
+    
+    Iterator<Map.Entry<Integer, Integer>> it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, Integer> entry = it.next();
+            if(entry.getValue()> flag){
+                list.add(entry.getKey());
+            }
+        }
+//2
+Iterator it = map.entrySet().iterator();
+
+while(it.hasNext()){
+
+Map.Entry entry = (Map.Entry) it.next();
+
+System.out.println(entry.getKey() + " : " + entry.getValue());
+
+}
+
+//3
+for (Map.Entry<Integer, Integer> entry : map.entrySet()) {  
+   
+     System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());  
+   
+ } 
+```
 
 
 
-
-###  [Collections 工具类和 Arrays 工具类常见方法](https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/basic/Arrays,CollectionsCommonMethods.md)
+###  [Collections 和 Arrays 工具类常见方法](https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/basic/Arrays,CollectionsCommonMethods.md)
 
 ####  Collections
 
-#####  排序操作
+**排序操作**
 
 ```java
 void reverse(List list)//反转
@@ -675,7 +1247,7 @@ void rotate(List list, int distance)//旋转。当distance为正数时，将list
 
 
 
-#####  查找,替换操作
+**查找,替换操作**
 
 ```java
 int binarySearch(List list, Object key)//对List进行二分查找，返回索引，注意List必须是有序的
@@ -693,7 +1265,7 @@ boolean replaceAll(List list, Object oldVal, Object newVal), 用新元素替换�
 
 import java.util.Arrays;
 
-##### 排序 :  Arrays.sort(array)/最小值
+**排序 :  Arrays.sort(array)/最小值**
 
 ~~~java
 
@@ -710,7 +1282,7 @@ Arrays.parallelSort(c);
 
 ~~~
 
-##### 查找 : Arrays.binarySearch(array，？)
+**查找 : Arrays.binarySearch(array，？)**
 
 ```java
 	// *************查找 binarySearch()****************
@@ -722,7 +1294,7 @@ Arrays.parallelSort(c);
 	int s = Arrays.binarySearch(e, 'c');
 	System.out.println("字符c在数组的位置：" + s);
 ```
-#####  比较: Arrays.equals(arr,arr)
+**比较: Arrays.equals(arr,arr)**
 
 ```java
 		// *************比较 equals****************
@@ -735,7 +1307,7 @@ Arrays.parallelSort(c);
 		System.out.println("Arrays.equals(e, f):" + Arrays.equals(e, f));
 ```
 
-#####  填充 : Arrays.fill(arr,?)
+**填充 : Arrays.fill(arr,?)**
 
 ```java
 		int[] h = { 1, 2, 3, 3, 3, 3, 6, 6, 6, };
@@ -748,7 +1320,7 @@ Arrays.parallelSort(c);
 		}
 ```
 
-#####  转字符串:Arrays.toString(k)
+**转字符串:Arrays.toString(k)**
 
 ```java
 		// *************转字符串 toString()****************
@@ -759,7 +1331,7 @@ Arrays.parallelSort(c);
 		System.out.println(Arrays.toString(k));// [a, f, b, c, e, A, C, B]
 ```
 
-#####  复制: Arrays.copyOf(arr,n)
+**复制: Arrays.copyOf(arr,n)**
 
 ```java
 		// *************复制 copy****************

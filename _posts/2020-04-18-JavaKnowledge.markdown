@@ -53,13 +53,51 @@ author: Sky
 
 - 其他待深入学习+补充
 
+
+
+
+
 #### [**一千行MySQL命令**]([https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%B8%80%E5%8D%83%E8%A1%8CMySQL%E5%91%BD%E4%BB%A4.md](https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/一千行MySQL命令.md))
 
 捡到了大宝贝
 
+
+
+
+
+
+
 #### ArraryList 扩容
 
-代办
+
+
+ArrayList实现了List接口，继承了AbstractList，底层是数组实现的，
+
+非线程安全的，一般多用于单线程环境下(与Vector最大的区别就是，Vector是线程安全的
+
+Serializable接口，因此它支持序列化：但是：**private** **transient** Object[] elementData; 
+
+注：假如elementData的长度为10，而其中只有5个元素，那么在序列化的时候只需要存储5个元素，而数组中后面5个元素是不需要存储的。于是将elementData定义为transient，避免了Java自带的序列化机制，并定义了两个方法，实现了自己可控制的序列化操作。（声明为static和transient类型的成员数据不能被序列化。因为static代表类的状态，transient代表对象的临时数据。）
+
+实现了RandomAccess接口，支持快速随机访问(只是个标注接口，并没有实际的方法),这里主要表现为可以通过下标直接访问(底层是数组实现的，所以直接用数组下标来索引)
+
+Cloneable接口，能被克隆
+
+
+
+**无参构造方法**：public ArrayList()  默认提供容量为10的数组（add实现
+
+自定义大小：public ArrayList(int initialCapacity)；
+
+**add方法**：
+
+超过当前集合的容量elementData.length，如果超过，则调用**grow**方法进行扩容：int newCapacity = oldCapacity + (oldCapacity >> 1), 扩容1.5倍
+
+
+
+
+
+
 
 
 
@@ -239,6 +277,35 @@ sinterstore key1 key2 key3     将交集存在key1内
 
 
 
+#### 基本数据类型和包装类
+
+###### [基本数据类型有什么好处](https://hollischuang.github.io/toBeTopJavaer/#/basics/java-basic/boxing-unboxing?id=基本数据类型有什么好处)
+
+我们都知道在Java语言中，`new`一个对象是存储在堆里的，我们通过栈中的引用来使用这些对象；所以，对象本身来说是比较消耗资源的。
+
+对于经常用到的类型，如int等，如果我们每次使用这种变量的时候都需要new一个Java对象的话，就会比较笨重。所以，和C++一样，Java提供了基本数据类型，这种数据的变量不需要使用new创建，他们不会在堆上创建，而是直接在栈内存中存储，因此会更加高效。
+
+
+
+###### [为什么需要包装类](https://hollischuang.github.io/toBeTopJavaer/#/basics/java-basic/boxing-unboxing?id=为什么需要包装类)
+
+很多人会有疑问，既然Java中为了提高效率，提供了八种基本数据类型，为什么还要提供包装类呢？
+
+这个问题，其实前面已经有了答案，因为Java是一种面向对象语言，很多地方都需要使用对象而不是基本数据类型。比如，在集合类中，我们是无法将int 、double等类型放进去的。因为集合的容器要求元素是Object类型。
+
+为了让基本类型也具有对象的特征，就出现了包装类型，它相当于将基本类型“包装起来”，使得它具有了对象的性质，并且为其添加了属性和方法，丰富了基本类型的操作。
+
+~~~java
+Integer integer=1; //装箱
+int i=integer; //拆箱
+//反编译结果
+Integer integer=Integer.valueOf(1);       
+int i=integer.intValue(); 
+~~~
+
+从上面反编译后的代码可以看出，int的自动装箱都是通过`Integer.valueOf()`方法来实现的，Integer的自动拆箱都是通过`integer.intValue`来实现的。如果读者感兴趣，可以试着将八种类型都反编译一遍 ，你会发现以下规律：
+
+> 自动装箱都是通过包装类的`valueOf()`方法来实现的.自动拆箱都是通过包装类对象的`xxxValue()`来实现的。
 
 
 
@@ -246,6 +313,60 @@ sinterstore key1 key2 key3     将交集存在key1内
 
 
 
+
+
+
+
+#### JVM知识串联（需要总结）
+
+
+
+#### Linux的常用命令（需要复习）
+
+- find、grep、ps、cp、move、tar、head、tail、netstat、lsof、tree、wget、curl、ping、ssh、echo、free、top
+
+
+
+会使用常用设计模式
+
+为什么推荐使用枚举实现单例?
+
+单例的七种写法
+
+
+
+简单数据结构
+栈
+队列
+链表
+数组
+哈希表
+栈和队列的相同和不同之处
+栈通常采用的两种存储结构
+两个栈实现队列，和两个队列实现栈
+
+树
+
+- 二叉树
+- 字典树
+- 平衡树
+- 排序树
+- B树
+- B+树
+- R树
+- 多路树
+- 红黑树
+
+
+
+
+
+- 深度优先和广度优先搜索
+- 全排列
+- 贪心算法
+- KMP算法
+- hash算法
+- 海量数据处理
 
 2020年4月8日 10点38分
 
