@@ -1,4 +1,6 @@
 ---
+
+
 layout: post
 title:  "数据结构算法题笔记"
 date:   2020/04/08 10点33分        
@@ -323,7 +325,7 @@ class Solution {
         int times = dR - tR;
         for(int i = 0; i<times;i++){  
             int temp = matrix[dR-i][tC];
-            matrix[dR-i][tC] =  matrix[dR][dC-i];
+            matrix[dR-i][tC] = matrix[dR][dC-i];
             matrix[dR][dC-i] = matrix[tR+i][dC];
             matrix[tR+i][dC] = matrix[tR][tC+i];
             matrix[tR][tC+i] = temp;
@@ -371,7 +373,59 @@ public int movingCount(int m, int n, int k) {
 
 ~~~
 
- 
+###  螺旋数组
+
+~~~java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> arr = new ArrayList<>();
+        if (matrix.length == 0)
+            return arr;
+        int tR = 0;
+        int tC = 0;
+        int dR = matrix.length -1;
+        int dC = matrix[0].length -1;
+        
+        while(tR <= dR && tC<=dC){
+            printEdge(matrix, tR++, tC++, dR--, dC--,arr);
+        }
+        // int[] ans = new int[arr.size()];
+        //  for (int i =0 ; i < arr.size(); i++){
+        //      ans[i] = arr.get(i);
+        //  }
+        return arr;
+    }
+    
+    public void printEdge(int[][] matrix, int tR, int tC, int dR, int dC,List ans) {
+        if(tR == dR){//一行
+            while(tC<=dC){
+                ans.add(matrix[tR][tC++]);
+            }
+        }else if (tC == dC){//yilie
+            while(tR<=dR){
+                ans.add(matrix[tR++][tC]);
+            }
+        }else{
+            int b = tC;
+            int a = tR;
+            while(b < dC){
+                ans.add(matrix[a][b++]);
+            }
+            while(a < dR){
+                ans.add(matrix[a++][dC]);
+            }
+            while(b > tR){
+                ans.add(matrix[dR][b--]);
+            }
+            while(a > tC){
+                ans.add(matrix[a--][tC]);
+            }
+        }
+    }
+}
+~~~
+
+
 
 ## 链表 ##
 
@@ -513,7 +567,7 @@ class Solution {
 
 
 
-
+**思路2：**尾首相连，再断连
 
 ## 字符串
 
@@ -555,6 +609,38 @@ public String reverseWords(String s){
 //Collections.reverse(List<?> list ) 反转list集合
 	Collections.reverse(wordList);
 ~~~
+
+### [14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
+
+
+
+~~~java
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        
+        if(strs.length == 0){
+            return "";
+        }
+
+        Arrays.sort(strs);
+        int m = strs[0].length();
+        int n = strs[strs.length-1].length();
+        int num = Math.min(m,n);
+        int i =0;
+        StringBuilder sb = new StringBuilder();
+
+        while(i<num && strs[0].charAt(i) == strs[strs.length-1].charAt(i)){
+            
+            sb.append(strs[0].charAt(i));
+            i++;
+        }
+
+        return sb.toString();
+    }
+}
+~~~
+
+
 
 ### [43.字符串相乘](https://leetcode-cn.com/problems/multiply-strings/)
 
@@ -663,7 +749,54 @@ end	end	end	end	end
  
 ~~~
 
+### 二叉树的公共祖先
+
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+**思路：**
+
+- 如果root==null  返回null
+
+- 如果root==p||q 返回root
+
+- 计算left=low（left,p,q）和right=low（right,p,q）
+
+1. 如果left ==null ，right ==null 返回null
+2. 如果left != null ， right == null 返回left
+3. 如果left == null ， right != null 返回right
+4. 如果left != null ， right！= null  返回root
+
+~~~java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null)return null;
+        if(root == p || root == q) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestor(root.left,p,q);
+        TreeNode right = lowestCommonAncestor(root.right,p,q);
+
+        if(left == null){
+            return right;
+        }
+
+        if(right==null){
+            return left;
+        }
+
+        if(left != null && right != null){
+            return root;
+        }
+        return null;
+    }
+}
+~~~
+
+
+
 ### 二叉树的镜像 ###
+
 请完成一个函数，输入一个二叉树，该函数输出它的镜像。**即：**左右子树互换。
 
 **思路：**
@@ -744,6 +877,78 @@ public TreeNode mirrorTree(TreeNode root) {
 ~~~
 
 
+
+### 锯齿形层序
+
+~~~java
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+        if(root==null)return ans;
+        
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int isleft = 0;
+        while(!queue.isEmpty()){
+            int qsize = queue.size();
+            List<Integer> curlevel = new ArrayList<>();
+            TreeNode cur =null;
+            for(int i = 0;i<qsize;i++){
+                if (isleft ==0){
+                    cur = queue.pollFirst();                    
+                    if(cur.left!=null) queue.addLast(cur.left);
+                    if(cur.right!=null) queue.addLast(cur.right);
+                }else{
+                    cur = queue.pollLast();
+                    if(cur.right!=null) queue.addFirst(cur.right);
+                    if(cur.left!=null) queue.addFirst(cur.left);
+                    
+                }
+                curlevel.add(cur.val);
+
+            }
+            isleft ^= 1;
+            ans.add(curlevel);
+           
+
+        }
+        return ans;
+    }
+}
+~~~
+
+
+
+### is二叉搜索树（中序遍历）
+
+
+
+
+
+~~~java
+    long pre = Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+
+        if(!isValidBST(root.left)){
+            return false;
+        }
+
+        if(root.val <= pre){
+            return false;
+        }
+
+        pre = root.val;
+
+        if(!isValidBST(root.right)){
+            return false;
+        }
+        return true;
+    }
+~~~
 
 
 
@@ -846,7 +1051,35 @@ class Foo {
 
 
 
-## 
+## 其他 
+
+### 做加法（位运算）
+
+
+
+ & 表示进位 << 1  表示进位和；异或和 a^b  表示无进位和；如果 进位和为0 ，a+b = a^b
+
+(a & b) << 1;//注意运算优先级
+
+~~~java
+class Solution {
+    public int add(int a, int b) {
+        // & 表示进位 << 1  表示进位和
+        // 异或和 a^b  表示无进位和；
+        //如果 进位和为0 ，a+b = a^b
+
+	while (b != 0) {
+		int tempSum = a ^ b;
+		int carrySum = (a & b) << 1;//注意运算优先级
+		a = tempSum;
+		b = carrySum;
+	}
+	return a;
+
+
+    }
+}
+~~~
 
 
 
@@ -923,6 +1156,25 @@ public boolean isValid(String s) {
 
 
 ## 常用API
+
+### 基姆拉尔森计算公式 推导-计算星期
+
+~~~java
+int y =year;
+int d = day;
+int m = month;
+if(m < 3){
+    m += 12;
+    y--;
+}
+int w = (y + y /4 + y / 400 - y / 100 + 2 * m + 3 * (m + 1)/5 + d) % 7;
+
+
+String[] weeks = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
+return weeks[w];
+~~~
+
+**注：** 这个公式中，`w = 0`对应的是星期一，`w = 6`对应的是星期日
 
 ### I/O
 
@@ -1138,6 +1390,8 @@ sb.toString()//转换为str
     queue.poll();//remove
 //4.返回头部
     queue.peek();//element
+
+queue.isEmpty()
 ```
 
 #### 动态数组ArrayList：ArrayList
@@ -1161,7 +1415,22 @@ String[] array = (String[])ans.toArray(new String[size]);
 int[] ans = new int[n];
 //
  List<String> list=Arrays.asList(array); 
+
 ~~~
+
+
+
+arrlist 转 arr
+
+~~~java
+int[] ans = new int[arr.size()]; //ArrayList→Array 输出结果 
+for (int i =0 ; i < arr.size(); i++){
+    ans[i] = arr.get(i);
+}
+return ans;
+~~~
+
+
 
 #### 哈希表HashSet
 

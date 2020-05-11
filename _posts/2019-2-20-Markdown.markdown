@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "MarkdownPad2完美安装"
+title:  "安装：MarkdownPad2、Xmind8"
 date:   2019/02/20       
 categories: me you
 tags: MarkdownPad2 .md
@@ -36,6 +36,20 @@ License Key:
 Tools——Options(直接按F7)
 
 Editor-**Language**:选择`中国`
+
+
+
+
+
+
+
+
+
+# XMind 8
+
+https://www.jianshu.com/p/e1693dad4dde
+
+
 
 
 

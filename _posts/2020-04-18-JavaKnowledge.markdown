@@ -331,6 +331,8 @@ int i=integer.intValue();
 
 为什么推荐使用枚举实现单例?
 
+避免
+
 单例的七种写法
 
 
@@ -367,6 +369,22 @@ int i=integer.intValue();
 - KMP算法
 - hash算法
 - 海量数据处理
+
+
+
+
+
+
+
+
+
+### https://gitee.com/SnailClimb/JavaGuide/blob/master/docs/java/Multithread/synchronized.md
+
+
+
+
+
+
 
 2020年4月8日 10点38分
 
