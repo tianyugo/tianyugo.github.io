@@ -716,6 +716,75 @@ class Solution {
 
 **思路2：**尾首相连，再断连
 
+
+
+### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+**一、迭代：**
+
+pre 指向当前节点的前一个节点
+cur 指向当前节点
+
+每一次迭代，将cur.next ->pre 并更新下一步的状态 pre = cur   cur= next 
+
+next 指向当前节点的下一个节点，需要首先保存。否则由于cur.next = pre 后 会找不到next
+
+~~~java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        ListNode pre = null;
+        ListNode next = null;
+        while(cur!=null){
+            next = cur.next;    //保存下一个节点next，防止断链后找不到，下一步迭代要作为当前节点。
+            cur.next = pre;     //核心：当前节点指向前一个节点
+            pre = cur;          //为下一步迭代做准备，当前节点作为下一步的pre
+            cur = next;         //下一步的cur 为刚才保存的下一个节点next
+        }
+        return pre;
+    }
+}
+
+~~~
+
+**二、递归**
+
+假设列表为：
+$$
+n_{1} \rightarrow \ldots \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \rightarrow \ldots \rightarrow n_{m} \rightarrow \varnothing
+$$
+若从节点$n_{k+1}$到$n_{m}$已经被反转，而我们正处于$n_{k}$。
+$$
+n_{1} \rightarrow \ldots \rightarrow n_{k-1} \rightarrow n_{k} \rightarrow n_{k+1} \leftarrow \ldots \leftarrow n_{m}
+$$
+
+我们希望$n_{k+1}$的下一个节点指向$n_{k}$。**现在是指向null**
+
+所以，$n_{k}.next.next = n_{k} $; 	$n_{k}.next = null $
+
+指向null很有必要，可以让$n_{1}$最后指向null；
+
+
+
+
+~~~java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode node = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return node;
+    }
+}
+~~~
+
+
+
+
+
+
+
 ## 字符串
 
 ### [翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
