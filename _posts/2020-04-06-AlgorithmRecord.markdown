@@ -425,6 +425,153 @@ class Solution {
 }
 ~~~
 
+### 数组中的逆序对
+
+思路：归并排序的同时加上高级操作。
+
+~~~java
+class Solution {
+    public int reversePairs(int[] nums) {
+        if(nums.length<=0)return 0;
+        return reversePairs(nums,0,nums.length-1);
+        
+    }
+
+    public int reversePairs(int[] nums,int l,int r) {
+        if(l == r) return 0;
+        int mid = l+(r-l)/2;
+        int left = reversePairs(nums,l,mid);
+        int right = reversePairs(nums,mid+1,r);
+        return left+right+merge(nums,l,mid,r);
+    }
+
+    public int  merge(int[] nums,int l,int mid,int r){
+        int count = 0;
+        int[] help = new int[r-l+1];
+        int p1 =l;
+        int p2 =mid+1;
+        int i =0;
+        while(p1<=mid&&p2<=r){
+            count+= nums[p1]<=nums[p2]? p2-(mid+1):0;
+            help[i++] = nums[p1]<=nums[p2]? nums[p1++]:nums[p2++];
+        }
+        while(p1<=mid){
+            count+=p2-(mid+1);
+            help[i++] = nums[p1++];
+        }
+        while(p2<=r){
+            help[i++] = nums[p2++];
+        }
+        //nums = help;//Java是值传递，没有用！！！！	
+        for (int j = 0; j < help.length; j++) {
+        	nums[l+j] = help[j];
+		}
+        return count;
+   }
+}
+~~~
+
+
+
+### 最大子數組和的最小值
+
+[410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+
+思路：二分法改進
+
+/用二分法去猜子数组的容量
+//如7 2 5 10 8 假设只有一个子数组那么数组的容量为32 如果有5个子数组那容量就是最大的那个数 10
+//所以从[10,32]之间用二分法
+
+//第一次 mid = (10+32)/2=21 我们刚开始假设只有一个子数组，那么need=1, 然后把数字一个一个塞进去
+//先塞7 7<21 继续 2 7+2<21 继续 7+2+5<21 继续 7+2+5+10>21 就意味着一个数组放不下我们让need+1=2
+//然后把后面的塞完,我们把need和m对比一下
+//如果比m大说明我们开的子数组太多，也就意味值我们数组容量太小 子数组数量*容量=数组和（不是很精确，大概是这个意思） 所以我们就从[22,32]区间中找
+//否则在[10,21]中找
+//我们这个例子从[10,21] 最后找到了18
+
+最小的子数组最大和在[maxAll,sumAll]之间，我们需要在之间找到这个值。
+
+使用二分改进去找到这个值。如何判断这个值在二分的mid的左边还是右边。我们需要考虑一件事，假设这个值是n，使用贪心来划分这个数组。看看划分子数组个数的是不是小于m。如果最小值是18，那么19可不可以。肯定是可以的。所以其实我们就是想找形如下面数组的最左边的1。如何判断这值对应是0还是1，需要能不能划分成小于m个子数组决定。
+
+   0000000001111111111111111111111
+
+
+
+~~~java
+//二分法
+class Solution {
+	public static int splitArray(int[] nums, int m) {
+		long sumAll = 0;//可能会越界，加大范围
+		long maxAll = 0;
+		for (int i : nums) {
+			sumAll += i;
+			if (maxAll < i) {
+				maxAll = i;
+			}
+		}
+		long r = sumAll;
+		long l = maxAll;
+		while (l < r) {
+			long mid = (l + r) / 2;
+			if (!can(nums, mid, m)) {
+				l = mid + 1;//注意
+			} else {
+				r = mid;//注意
+			}
+		}
+		return (int)l;
+	}
+
+	public static boolean can(int[] nums, long mid, int m) {
+		int count = 1;
+		long sum = 0;
+		for (int i : nums) {
+			long cur = sum + i;
+			if (cur > mid) {
+				count++;
+				sum = i;
+
+			} else {
+				sum += i;
+			}
+		}
+		return count <= m;
+
+	}
+}
+~~~
+
+### [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
+
+使用前缀和，之后思路和两数之和一致
+
+注意需要 需要加入第0个数0。
+
+~~~java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        Integer pre = 0;
+        int count = 0;
+        for(int i = 0; i< nums.length; i++){
+            pre = pre + nums[i];
+            if(map.containsKey(pre-k)){
+                count+=map.get(pre-k);
+            }
+            if(!map.containsKey(pre)){
+                map.put(pre,1);
+            }else{
+                map.put(pre,map.get(pre)+1);
+            }
+            
+        }
+        return count;
+    }
+}
+~~~
+
 
 
 ## 链表 ##

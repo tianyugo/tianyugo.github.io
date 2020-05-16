@@ -1,0 +1,30 @@
+---
+layout: post
+title:  " 记录一些小技巧"
+date:   2020年5月14日   
+categories: me
+tags: baidu 
+excerpt: 随手记录windows小技巧
+mathjax: true
+author: Tianyu Shen
+---
+
+
+
+
+
+## 最小化输入法
+
+设置——win+I
+
+高级键盘设置
+
+- [ ] 使用桌面语言栏
+
+
+
+
+
+## 保存windows自动锁屏壁纸
+
+C:\Users\用户名\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
