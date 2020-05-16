@@ -779,9 +779,61 @@ class Solution {
 }
 ~~~
 
+### [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+
+用到了上述反转链表。再结合下图3，4，5行进行链表
+
+示例：
+
+给你这个链表：1->2->3->4->5
+
+当 k = 2 时，应当返回: 2->1->4->3->5
+
+当 k = 3 时，应当返回: 3->2->1->4->5
 
 
 
+<img src="https://pic.leetcode-cn.com/866b404c6b0b52fa02385e301ee907fc015742c3766c80c02e24ef3a8613e5ad-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.png" style="zoom: 67%;" />
+
+~~~java
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode pre = dummy;
+        ListNode end = dummy;
+        
+        while(end.next!=null){
+            for(int i = 0;i<k&&end !=null;i++){
+                end = end.next;
+            }
+            if (end == null) break;//not enough 
+            ListNode next = end.next;
+            end.next = null; //断链          
+            ListNode start = pre.next;
+            pre.next = reverseList(start);
+            start.next =next;
+            end = start;
+            pre = start;
+        }
+        
+
+        
+       return dummy.next;
+
+    }
+
+
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode node = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return node;
+    }
+}
+~~~
 
 
 

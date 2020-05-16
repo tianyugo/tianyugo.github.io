@@ -28,3 +28,10 @@ author: Tianyu Shen
 ## 保存windows自动锁屏壁纸
 
 C:\Users\用户名\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
+
+
+
+## IDEA 2020
+
+https://www.cnblogs.com/xpybsh/p/12703269.html
+
