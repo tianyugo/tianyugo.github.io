@@ -1,4 +1,7 @@
 ---
+****
+
+
 
 
 layout: post
@@ -572,6 +575,65 @@ class Solution {
 }
 ~~~
 
+### [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) 
+
+和后一题一样，思路为使用以i结尾的dp
+
+~~~java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int[] maxWithEnd = new int[nums.length];
+        maxWithEnd[0] = nums[0];
+        int max = maxWithEnd[0];
+        int i =1;
+        while(i<=nums.length-1){
+            maxWithEnd[i]= Math.max(maxWithEnd[i-1]+nums[i],nums[i]);
+            max = Math.max(maxWithEnd[i],max);
+            i++;
+        }
+        return max;
+
+    }
+}
+~~~
+
+
+
+
+
+### [152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)
+
+
+
+~~~java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int len = nums.length;
+        if(len == 0){
+            return 0;
+        }
+
+        int[][] dp = new int[len][2];
+        dp[0][0] = nums[0];//min
+        dp[0][1] = nums[0];//max
+        int res = nums[0];
+        for(int i = 1 ; i< len;i++){
+            if (nums[i] >= 0) {
+                dp[i][0] = Math.min(nums[i], nums[i] * dp[i - 1][0]);
+                dp[i][1] = Math.max(nums[i], nums[i] * dp[i - 1][1]);
+            } else {
+                dp[i][0] = Math.min(nums[i], nums[i] * dp[i - 1][1]);
+                dp[i][1] = Math.max(nums[i], nums[i] * dp[i - 1][0]);
+            }
+            res = Math.max(res, dp[i][1]);
+
+        }
+        return res;
+
+    }
+}
+~~~
+
 
 
 ## 链表 ##
@@ -1003,6 +1065,218 @@ signed	end	end	in_number	end
 in_number	end	end	in_number	end
 end	end	end	end	end
 
+### [680. 验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
+
+给定一个非空字符串 `s`，**最多**删除一个字符。判断是否能成为回文字符串。
+
+全局定义一个flag，验证是否删除过。
+
+~~~java
+class Solution {
+    int del = 0;
+    public boolean validPalindrome(String s) {
+        int l = 0;
+        int r = s.length()-1;
+        
+        while(l<r){
+            if(s.charAt(l)==s.charAt(r)){
+                l++;
+                r--;
+            }else{
+                if(del == 0){
+                    del++;
+                    return validPalindrome(s.substring(l+1,r+1)) || 			validPalindrome(s.substring(l,r));
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+}
+~~~
+
+
+
+### [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+
+**方法1：暴力法**
+
+**思路：**
+
+~~~java
+for i {
+    for j {
+        j-i+1 > maxLen &&   is回文(i,j)
+       	  记录：start:i;
+        	  manLen:j-i+1;
+    }
+}
+return substring(start,start+maxLen)
+~~~
+
+
+
+**代码：**
+
+~~~java
+class Solution {
+    public String longestPalindrome(String s) {
+        char[]  str = s.toCharArray();
+        int n = str.length;
+        if(n<2){
+            return s;
+        }
+        int maxLen = 1;
+        int start = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n ;j++){
+                if(j-i+1 > maxLen &&  validPalindrome(str, i, j)){
+                    maxLen = j-i+1;
+                    start = i;
+                }
+            }
+        }
+        return s.substring(start,start+maxLen);
+    }
+
+    public boolean validPalindrome(char[] s,int l, int r) {
+        while(l<r){
+            if(s[l]==s[r]){
+                l++;
+                r--;
+            }else{                
+                return false;
+            }
+        }
+        return true;
+    }
+}
+~~~
+
+
+
+**方法2：动态规划**
+
+思路：
+
+|      | j 0  | j1   | j2   | j3   |
+| :--: | ---- | ---- | ---- | ---- |
+|  i0  | T    |      |      |      |
+|  i1  | ×    | T    |      |      |
+|  i2  | ×    | ×    | T    |      |
+|  i3  | ×    | ×    | ×    | T    |
+
+如果 at[i] == at[j]   则检测  j-i是不是小于3，
+
+​		小于三说明内部0/1个数，一定为True
+
+​		否则    $dp[i][j]=dp [i+1][ j-1]$   即左下角。因此不能行普通遍历，这里采用了 $j:0-n,i:0-j$  列遍历
+
+~~~java
+class Solution {
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        if (len < 2) {
+            return s;
+        }
+
+        int maxLen = 1;
+        int begin = 0;
+
+        boolean[][] dp = new boolean[len][len];
+        char[] str = s.toCharArray();     
+
+        for(int j = 0; j < len; j++){
+            for(int i = 0; i<j;i++){
+                if( i == j ){
+                    dp[i][j] = true;
+                }else if(str[i] ==  str[j]){
+                    if(j-i < 3){
+                        dp[i][j] = true;
+                    }else{
+                        dp[i][j] = dp[i+1][j-1];
+                    }
+                }else{
+                   dp[i][j] = false; 
+                }
+
+                if(dp[i][j]==true && j-i+1>maxLen){
+                    begin = i;
+                    maxLen = j-i+1;
+                }                     
+            }
+        }
+
+        return s.substring(begin,begin+maxLen);
+    }
+}
+~~~
+
+
+
+
+
+### [1371. 每个元音包含偶数次的最长子字符串](https://leetcode-cn.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/)
+
+给你一个字符串 `s` ，请你返回满足以下条件的最长子字符串的长度：每个元音字母，即 'a'，'e'，'i'，'o'，'u' ，在子字符串中都恰好出现了偶数次。
+
+大致思路：记录前缀中元音出现的次数。用五位二进制表示，00000，表示都未出现过。每一步更新当前状态，如果之前出现过，说明出现过同奇/偶，满足条件，计算长度。要注意扣边界。
+
+1. 初始化 $00000$ 的状态:  位置： $-1$ ，其他均未出现，填入$-2$
+
+2. 记录状态：$xxxxx$   位置： $i$	
+
+   因为要算出最长的，因此只记录最早出现过位置，重复出现说明满足偶数次条件，不更新，并计算长度。
+
+   记录可以使用Map。但是考虑到总共就32种状态，可用数组代替）
+
+3. $status[i]==status[j]$ 表示的范围是  $i+1$ ~ $j$ ；长度: $j-i$
+
+
+
+
+
+
+
+~~~java
+class Solution {
+    public int findTheLongestSubstring(String s) {
+        //前缀和思路，计算前缀种每一个原音出现的奇偶(次数)，用状态来表示
+        int[] status = new int[1<<5];// 共计00000-11111，32种状态，index 为状态，context为 最早出现的位置
+        int curStatus = 0;
+        //任何状态都没有出现过
+        Arrays.fill(status, -2);
+        status[0] = -1;
+        int max = 0;
+        for(int i = 0; i < s.length();i++){
+            char cur = s.charAt(i);
+            if(cur == 'a'){
+                curStatus ^= (1<<4); 
+            }else if(cur == 'e'){
+                curStatus ^= (1<<3); 
+            }else if(cur == 'i'){
+                curStatus ^= (1<<2); 
+            }else if(cur == 'o'){
+                curStatus ^= (1<<1); 
+            }else if(cur == 'u'){
+                curStatus ^= (1<<0); 
+            }
+
+            if(status[curStatus] == -2){
+                status[curStatus] = i;
+            }else{
+                max = Math.max(max,i-status[curStatus]);
+            }
+        }
+        return max;
+    }
+}
+~~~
+
+
+
+
+
 ## 二叉树  ##
 
 ~~~java
@@ -1420,6 +1694,56 @@ public boolean isValid(String s) {
 ~~~
 
 
+
+### [210. 课程表 II](https://leetcode-cn.com/problems/course-schedule-ii/) ：[拓扑排序](https://mp.weixin.qq.com/s?__biz=MzA3MjU5NjU2NA==&mid=2455502896&idx=1&sn=df6f2c86e0f1de823f79087ba9e8eb33&chksm=88b34d0bbfc4c41d863b4b6d78309e6ae01e766b1a7826b4c326246dd2489df9d684e8091ece&scene=21#wechat_redirect)
+
+思路：
+
+1. 建立入度表
+2. 遍历入度表，寻找入度为零的，加入队列
+3. **维护一个队列**，弹出一个直到队列为空，**减去相关课程的入度**。并检测其入度是否为0，加入队列。
+
+~~~java
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        
+        int[] indegreeTable =new int[numCourses];
+        Queue<Integer> que = new LinkedList<>();
+        int[] ans = new int[numCourses];
+        //建立入度表
+        for(int[] p : prerequisites){
+            indegreeTable[p[0]]++;
+        }
+        //遍历入度表，寻找入度为零的，加入队列
+        
+        for(int i = 0;i<numCourses;i++){
+            if(indegreeTable[i]==0){
+                que.offer(i);
+            }
+        }
+        //维护一个队列，弹出一个直到队列为空，减去相关课程的入度。并检测其入度是否为0，加入队列。
+        int num = 0;
+        while(!que.isEmpty()){
+            int cur = que.poll();
+            ans[num++] = cur;
+            for(int[] p : prerequisites){
+                if(p[1]==cur){
+                    indegreeTable[p[0]]--;
+                    if(indegreeTable[p[0]]==0){
+                        que.offer(p[0]);
+                    }
+                }  
+            }
+        }
+
+        if(num == numCourses){
+            return ans;
+        }
+        return new int[]{};
+
+    }
+}
+~~~
 
 
 
