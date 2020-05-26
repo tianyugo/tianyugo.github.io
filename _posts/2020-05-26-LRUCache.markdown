@@ -1,0 +1,338 @@
+---
+
+layout: post
+title:  "LRUCache学习与实现"
+date:   2020年5月26日  19点50分       
+categories:  
+tags: code
+excerpt: Java 数据结构与算法
+mathjax: true
+author: Sky
+---
+
+* content
+{:toc}
+# LRUCache
+
+> Least Recently Used
+
+## 题目描述
+
+运用你所掌握的数据结构，设计和实现一个 LRU (最近最少使用) 缓存机制。它应该支持以下操作： 
+
+- **获取数据** **get(key)**：
+
+  如果 $key$ 存在于缓存中，则获取 $key$  的 $value$ （总是正数），否则返回 -1。
+
+- **写入数据 put(key, value)** 
+
+  如果 $key$ 不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最近最少使用的数据值，从而为新的数据值留出空间。
+
+你是否可以在 $O(1)$ 时间复杂度内完成这两种操作？
+
+ 
+
+## 分析
+
+使用HashMap存放 K-V，获取和写入能够满足时间复杂度 $O(1)$
+
+但是，HashMap中的数据没有顺序，无法实现定位到最少使用的数据。因此，可以使用双向链表进一步改进：
+
+1. 每次获取/写入的 K-V 移动到链表头；
+2. 容量到达上限将链尾 K-V 删除。
+
+那么使用已定义好的 LinkedList，然后同步更新Map和List满足题意呢？答案是不能。因为查询LinkedList的时间复杂度无法常数级别。因此，设计链表节点类：
+
+~~~java
+private static class LinkedNode{
+    DoubleLinkedNode pre;
+    DoubleLinkedNode next;
+    int key;
+    int value;
+}
+~~~
+
+并使用HashMap保存key-Node
+
+~~~java
+private HashMap<Integer, DoubleLinkedNode> map = new HashMap<>();
+
+~~~
+
+![绘图1](C:\Users\Sty\Documents\tianyugo.github.io\picture\绘图1.jpg)
+
+使用Node  Head，Tail  的好处不赘述。
+
+- 将 recently used 放到表头： $head.pre$
+- 容量满了删除 least recently used：  $tail.pre$
+
+### 代码逻辑
+
+~~~java
+public int get(int key) 
+    1.有key
+            map | get(key)
+        nodeList| moveToHead(node)
+            返回 | node.val
+    2.无key
+            map | 无操作
+        nodeList| 无操作
+            返回 | -1
+}
+
+
+public void put(int key, int value) {
+    contains(key)
+        update node 
+        map  | <k,updatednode>
+        nodeList |  moveToHead(updatednode) 
+        
+    !contains(key)
+		map | <k,node>
+		nodeList | addTOHead(node)
+		delete(tail.pre) if necessary
+}
+
+
+// moveToHead移动操作可以分解为：delete(node)  + addToHead(head)
+
+	private void toHead(DoubleLinkedNode node) {
+		// head - d
+		// node
+		DoubleLinkedNode next = head.next;
+        node.pre = head;
+		node.next = next;
+		head.next = node;
+		next.pre = node;
+
+	}
+
+	private void delete(DoubleLinkedNode node) {
+		// head-d-d-d-n-d-d-tail
+		DoubleLinkedNode pre = node.pre;
+		DoubleLinkedNode next = node.next;
+		pre.next = next;
+		next.pre = pre;
+
+	}
+~~~
+
+
+
+
+
+
+
+### 整体实现
+
+~~~java
+package leetcode;
+
+import java.util.HashMap;
+
+public class LRUCache {
+	private int capacity;
+	private DoubleLinkedNode head;
+	private DoubleLinkedNode tail;
+	private HashMap<Integer, DoubleLinkedNode> map = new HashMap<>();
+
+	public LRUCache(int capacity) {
+		this.capacity = capacity;
+		head = new DoubleLinkedNode();
+		tail = new DoubleLinkedNode();
+		head.next = tail;
+		tail.pre = head;
+
+	}
+
+	private static class DoubleLinkedNode {
+		DoubleLinkedNode pre;
+		DoubleLinkedNode next;
+		int key;
+		int value;
+
+		public DoubleLinkedNode() {
+		}
+
+		public DoubleLinkedNode(int key, int value) {
+			this.key = key;
+			this.value = value;
+		}
+
+	}
+
+	// 有key
+	// ---map 找node
+	// ---nodeList node→head
+	// ---返回 node.val
+	// 无key
+	// --- map ×
+	// ---nodeList ×
+	// ---返回-1
+	public int get(int key) {
+		if (map.containsKey(key)) {
+			DoubleLinkedNode node = map.get(key);
+			delete(node);
+			toHead(node);
+			return node.value;
+		} else {
+			return -1;
+		}
+	}
+
+	private void toHead(DoubleLinkedNode node) {
+		// moveToHead
+		// head - d
+		// node
+
+		node.pre = head;
+		node.next = head.next;
+		head.next = node;
+		node.next.pre = node;
+
+	}
+
+	private void delete(DoubleLinkedNode node) {
+		// head-d-d-d-n-d-d-tail
+		DoubleLinkedNode pre = node.pre;
+		DoubleLinkedNode next = node.next;
+		pre.next = next;
+		next.pre = pre;
+
+	}
+	// if(!contains)
+	// ---map+<k,v>
+	// ---nodeList+node->head
+	// ---delete tail.pre if necessary
+
+	public void put(int key, int value) {
+		if (map.containsKey(key)) {
+			DoubleLinkedNode node = map.get(key);
+			node.value = value;
+			map.put(key, node);
+			delete(node);
+			toHead(node);
+		} else {
+			DoubleLinkedNode node = new DoubleLinkedNode(key, value);
+			map.put(key, node);
+			toHead(node);
+			if (map.size() > capacity) {
+				map.remove(tail.pre.key);
+				delete(tail.pre);
+
+			}
+		}
+
+	}
+
+}
+
+
+~~~
+
+### LinkedHashMap实现
+
+
+
+~~~java
+class LRUCache extends LinkedHashMap<Integer, Integer> {
+	private int capacity;
+
+	public LRUCache(int capacity) {
+		super(capacity, 0.75F, true);
+		this.capacity = capacity;
+	}
+
+	public int get(int key) {
+		return super.getOrDefault(key, -1);
+	}
+
+	public void put(int key, int value) {
+		super.put(key, value);
+	}
+
+	@Override
+	protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+		return size() > capacity;
+	}
+
+}
+~~~
+
+
+
+## 测试
+
+~~~java
+	public static void main(String[] args) {
+        LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.get(1);       // 返回  1
+        cache.put(3, 3);    // 该操作会使得关键字 2 作废
+        cache.get(2);       // 返回 -1 (未找到)
+        cache.put(4, 4);    // 该操作会使得关键字 1 作废
+        cache.get(1);       // 返回 -1 (未找到)
+        cache.get(3);       // 返回  3
+        cache.get(4);       // 返回  4
+    }
+
+~~~
+
+测试2
+
+        ~~~java
+LRUCache cache = new LRUCache(2 /* 缓存容量 */ );
+cache.put(2, 1);
+cache.put(1, 1);
+cache.put(2, 3);
+cache.put(4, 1);
+cache.get(1); 
+cache.get(2);
+        ~~~
+
+### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2020年4月8日 10点38分
+
+联系我：shentianyu18@163.com
+
+
+
+
+
+
+
+
+
+  
+
+

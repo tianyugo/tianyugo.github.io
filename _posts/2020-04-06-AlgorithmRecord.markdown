@@ -1492,6 +1492,69 @@ class Solution {
     }
 ~~~
 
+### [105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+**思路：**
+
+preorder = [ 根节点, [左子树], [右子树] ]
+
+inorder    = [ [左子树], 根节点, [右子树] ]
+
+先找到根节点在inorder的位值 $i$， preorder中右子树的开头 $j=i+1$
+
+- 根.left = (pre左，in左)
+- 根.right = (pre右，in右)
+
+
+
+
+
+~~~java
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int len = preorder.length ;
+       
+        if(len==0){
+            return null;
+        }
+
+        TreeNode pFirst = new TreeNode(preorder[0]);
+        if(len==1){
+            return pFirst;
+        }
+        int a = 0;
+        for(int i = 0;i<len;i++){
+            if(inorder[i]==pFirst.val){
+                a = i;
+                break;
+            }
+        }
+        int[] pL,pR,iL,iR;
+        if(a==0){
+            pFirst.left = null;
+            pFirst.right = buildTree(Arrays.copyOfRange(preorder,1,len),Arrays.copyOfRange(inorder,1,len));
+        }else if(a==len){
+            pFirst.right = null;
+            pFirst.left = buildTree(Arrays.copyOfRange(preorder,1,len),Arrays.copyOfRange(inorder,0,len-1));
+        }else{
+            //找到p中的分界点
+            iL = Arrays.copyOfRange(inorder,0,a);
+            iR = Arrays.copyOfRange(inorder,a+1,len);
+            int j = a+1;
+            pL = Arrays.copyOfRange(preorder,1,j);
+            pR = Arrays.copyOfRange(preorder,j,len);
+            pFirst.left = buildTree(pL,iL);
+            pFirst.right = buildTree(pR,iR);
+        }
+
+        return pFirst;
+    }
+   
+}
+~~~
+
+
+
 
 
 ## 递归与动态规划
@@ -1741,6 +1804,55 @@ class Solution {
         }
         return new int[]{};
 
+    }
+}
+~~~
+
+### 整数回文
+
+反转一半，再比较
+
+```java
+    while(x > re){
+        re = re * 10 + x % 10;
+        x /= 10;
+    }
+    return x == re || x == re/10;
+```
+~~~java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0|| (x % 10 == 0 && x != 0))return false;
+        int re = 0;
+        while(x > re){
+            re = re*10+x%10;
+            x/=10;
+        }
+        return x ==re || x==re/10;
+    }
+}
+~~~
+
+### 整数翻转
+
+~~~java
+class Solution {
+    public int reverse(int x) {
+        // [−2^31,  2^31 − 1]，数学归纳法可知，2^31最后一位是8,正数最后一位所以是7
+        //int最大值是2147483647，最小值是-2147483648
+        int rev = 0;
+        int pop = 0;
+        while(x!=0){
+            pop = x % 10;
+            
+            if(rev>Integer.MAX_VALUE/10 || (rev==Integer.MAX_VALUE/10 && pop>Integer.MAX_VALUE%10)) return 0;
+            if(rev<Integer.MIN_VALUE/10 || (rev==Integer.MIN_VALUE/10 && pop<Integer.MIN_VALUE%10)) return 0;
+
+            rev = rev*10 +pop;
+            x /= 10;
+        }
+   
+        return rev;
     }
 }
 ~~~
