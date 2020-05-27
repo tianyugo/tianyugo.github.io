@@ -3,7 +3,7 @@ layout: post
 title:  "阿里校招笔试题复盘1题"
 date:   2020/04/28 10点33分        
 categories: you
-tags: java
+tags: Java
 excerpt: 参加了2020.4.28的阿里实习校招笔试，复盘一下
 mathjax: true
 author: Sky
