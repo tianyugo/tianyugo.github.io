@@ -1,4 +1,5 @@
 ---
+
 ****
 
 
@@ -574,6 +575,50 @@ class Solution {
     }
 }
 ~~~
+
+
+
+
+
+### [974. 和可被 K 整除的子数组](https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/)
+
+前缀和+hashmap查找
+
+
+
+```java
+public static int subarraysDivByK(int[] A, int K) {
+
+	HashMap<Integer, Integer> sumMap = new HashMap<>();
+	// <前缀和%K，times>
+
+	// (sum[j] - sum [i])%K== 0
+	// 等价于 sum[j] % K == sum[i] % K
+	sumMap.put(0, 1);// 千万别忘！！！！！！！！！！
+	int ans = 0;
+	int sum = 0;
+	for (int i = 0; i < A.length; i++) {
+		sum += A[i];
+		int cur = (sum % K + K) % K;
+		int times = sumMap.getOrDefault(cur, 0);
+		ans += times;
+		sumMap.put(cur, times + 1);
+	}
+	return ans;
+}
+```
+test
+
+~~~java
+int[] A = new int[] { 4, 5, 0, -2, -3, 1 };
+int K = 5;
+System.out.println(subarraysDivByK(A, K));
+//7
+~~~
+
+
+
+
 
 ### [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/) 
 
@@ -1553,7 +1598,25 @@ class Solution {
 }
 ~~~
 
+### [101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)：递归
 
+~~~java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return isSymmetric(root,root);
+    }
+    public boolean isSymmetric(TreeNode root1,TreeNode root2){
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+
+        return root1.val==root2.val && isSymmetric(root1.right,root2.left)&& isSymmetric(root1.left,root2.right);
+    }
+}
+~~~
 
 
 
@@ -1854,6 +1917,30 @@ class Solution {
    
         return rev;
     }
+}
+~~~
+
+
+
+### [11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/):双指针
+
+~~~java
+class Solution {
+	public int maxArea(int[] height) {
+		int l = 0;
+		int r = height.length - 1;
+		int max = 0;
+		while (l < r) {
+			int cur = Math.min(height[l], height[r]) * (r - l);
+			max = Math.max(max, cur);
+			if (height[l] <= height[r]) {
+				l++;
+			} else {
+				r--;
+			}
+		}
+		return max;
+	}
 }
 ~~~
 
