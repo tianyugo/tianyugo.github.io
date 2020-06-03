@@ -14,11 +14,11 @@ author: Sky
 {:toc}
 
 
-### 从最大矩形开始单调栈
+# 从最大矩形开始单调栈
 
-#### [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+## [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
-##### 1.暴力
+### 1.暴力
 
 ~~~java
 	public static int largestRectangleArea(int[] heights) {
@@ -52,7 +52,7 @@ author: Sky
 	}
 ~~~
 
-##### 2.单调栈
+### 2.单调栈
 
 ~~~java
 	public static int largestRectangleArea2(int[] heights) {
@@ -95,7 +95,7 @@ author: Sky
 	}
 ~~~
 
-##### 3.单调栈+哨兵优化
+### 3.单调栈+哨兵优化
 
 相当于首尾加 0.
 
@@ -135,9 +135,28 @@ author: Sky
 
 
 
+## 最大子矩阵
 
+$$
+\left[ {\begin{array}{*{20}{c}}
+{\rm{1}}&{\rm{0}}&{\rm{1}}&{\rm{1}}\\
+{\rm{1}}&{\rm{1}}&{\rm{1}}&{\rm{1}}\\
+{\rm{1}}&{\rm{1}}&{\rm{1}}&{\rm{1}}
+\end{array}} \right]
+$$
 
-
-
-  
-
+  一、分行求高度
+$$
+\begin{array}{l}
+\left[ {\begin{array}{*{20}{c}}
+{\rm{1}}&{\rm{0}}&{\rm{1}}&{\rm{1}}
+\end{array}} \right]\\
+\left[ {\begin{array}{*{20}{c}}
+{\rm{2}}&{\rm{1}}&{\rm{2}}&{\rm{2}}
+\end{array}} \right]\\
+\left[ {\begin{array}{*{20}{c}}
+{\rm{3}}&{\rm{2}}&{\rm{3}}&{\rm{0}}
+\end{array}} \right]
+\end{array}
+$$
+二、单调栈逐行求面积（每一行就是上面的问题：柱状图中的最大矩阵）

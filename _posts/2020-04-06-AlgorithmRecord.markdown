@@ -1661,6 +1661,12 @@ List<String> res = new ArrayList<>();
   }
 ~~~
 
+
+
+
+
+
+
 ## 多线程
 
 #### [ 按序打印](https://leetcode-cn.com/problems/print-in-order/)
@@ -1745,6 +1751,48 @@ class Solution {
 	return a;
 
 
+    }
+}
+~~~
+
+### [面试题64. 求1+2+…+n](https://leetcode-cn.com/problems/qiu-12n-lcof/)
+
+要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+
+1. 利用
+
+   ~~~java
+   class Solution {
+       public int sumNums(int n) {
+   		boolean flag = (n > 0) && (n = n + sumNums(n - 1)) > 0;
+   		return n;
+       }
+   }
+   ~~~
+
+2. 位运算
+
+   「俄罗斯农民乘法」
+
+   由等差数列求和公式我们可以知道 1 + 2 + \cdots + n1+2+⋯+n 等价于 \frac{n(n+1)}{2} 
+   2
+   n(n+1)
+   	
+    ，对于除以 22 我们可以用右移操作符来模拟，那么等式变成了 n(n+1)>>1n(n+1)>>1，剩下不符合题目要求的部分即为 n(n+1)n(n+1)
+
+   。
+
+   ~~~java
+   
+   ~~~
+
+   
+
+~~~java
+class Solution {
+    public int sumNums(int n) {
+		boolean flag = (n > 0) && (n = n + sumNums(n - 1)) > 0;
+		return n;
     }
 }
 ~~~
