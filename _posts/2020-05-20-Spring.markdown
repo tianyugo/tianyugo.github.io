@@ -2,8 +2,8 @@
 layout: post
 title:  "Spring学习笔记"
 date:   2020年5月22日 10点33分        
-categories: me 
-tags: code
+categories: me
+tags: Java
 excerpt: Spring IOC AOP
 mathjax: true
 author: Sky
@@ -11,6 +11,8 @@ author: Sky
 
 * content
 {:toc}
+
+
 # Spring
 
 ## Spring 相关概念
