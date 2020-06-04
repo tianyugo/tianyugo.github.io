@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "摩尔投票：求众数（n/2；n/3）"
-date:   2020/06/01 21点20分       
+title:  "动态规划学习"
+date:   2020/06/04 21点20分       
 categories: me
 tags: Java
-excerpt: 从求众数学习摩尔投票方法
+excerpt: 记录动态规划的学习和例题
 mathjax: true
 author: Sky
 
@@ -16,7 +16,7 @@ author: Sky
 
 # 动态规划
 
-## [837. 新21点](https://leetcode-cn.com/problems/new-21-game/)
+## [837. 新21点](https://leetcode-cn.com/problems/new-21-game/)-后往前
 
 爱丽丝参与一个大致基于纸牌游戏 “21点” 规则的游戏，描述如下：
 
@@ -113,7 +113,7 @@ class Solution {
 
 
 
-## [983. 最低票价](https://leetcode-cn.com/problems/minimum-cost-for-tickets/)
+## [983. 最低票价](https://leetcode-cn.com/problems/minimum-cost-for-tickets/)-后往前
 
 在一个火车旅行很受欢迎的国度，你提前一年计划了一些火车旅行。在接下来的一年里，你要旅行的日子将以一个名为 days 的数组给出。每一项是一个从 1 到 365 的整数。
 
@@ -127,9 +127,13 @@ class Solution {
 
 返回你想要完成在给定的列表 days 中列出的每一天的旅行所需要的最低消费。
 
+money1+dp[x+1]
+
+money7+dp[x+7]
+
+money30+dp[x+30]
 
 
-### 
 
 ~~~java
 class Solution {
@@ -144,6 +148,8 @@ class Solution {
             int  day  = days[i];
             int day7 = day +7-1;
             int day30 = day +30-1;
+            
+            //算一下7天后，和30天后有没有超范围
             int l7 = 0;
             int l30 = 0;
             while(i+l7 < len &&  days[i+l7] <= day7){
