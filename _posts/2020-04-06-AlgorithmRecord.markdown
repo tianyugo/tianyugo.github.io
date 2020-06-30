@@ -679,6 +679,43 @@ class Solution {
 }
 ~~~
 
+### [1014. 最佳观光组合](https://leetcode-cn.com/problems/best-sightseeing-pair/)
+
+给定正整数数组 A，A[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的距离为 j - i。
+
+一对景点（i < j）组成的观光组合的得分为（A[i] + A[j] + i - j）：景点的评分之和减去它们两者之间的距离。
+
+返回一对观光景点能取得的最高分。
+
+示例：
+
+输入：[8,1,5,2,6]
+输出：11
+解释：i = 0, j = 2, A[i] + A[j] + i - j = 8 + 5 + 0 - 2 = 11
+
+**思路**： A[i]+i	A[j]+j
+
+以第二数来进行一遍遍历，一直维护一个直到这个数之前的最大值，
+
+
+
+~~~java
+class Solution {
+    public int maxScoreSightseeingPair(int[] A) {
+        int score = 0;
+        int left = A[0];
+        for(int i = 1; i < A.length; i++){
+            int curScore = left + A[i]-i;
+            score = Math.max(score,curScore);
+            left = Math.max(left,A[i]+i);
+        }
+        return score;
+    }
+}
+~~~
+
+
+
 
 
 ## 链表 ##
@@ -1615,6 +1652,50 @@ class Solution {
 
         return root1.val==root2.val && isSymmetric(root1.right,root2.left)&& isSymmetric(root1.left,root2.right);
     }
+}
+~~~
+
+### [124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)：递归
+
+给定一个**非空**二叉树，返回其最大路径和。
+
+本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径**至少包含一个**节点，且不一定经过根节点。
+
+```
+输入: [-10,9,20,null,null,15,7]
+
+   -10
+   / \
+  9  20
+    /  \
+   15   7
+
+输出: 42
+```
+
+思路：递归返回到该节点的路径最大值：val+递归（left），val+递归（right），递归的值如果是负数，可以舍弃不加入这个路径，相当于0，因此可以使用：Math.max(0,maxPath(root.left))  解决
+
+同时记录着全局的最大路径，maxSum = Math.max(maxSum,l+val+r);
+
+~~~java
+class Solution {
+    int maxSum = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        maxPath(root);
+        return maxSum;
+    }
+
+    public int maxPath(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int value = root.val;
+        int l = Math.max(0,maxPath(root.left));
+        int r = Math.max(0,maxPath(root.right));
+        maxSum = Math.max(maxSum,l+value+r);
+        return Math.max(value+l,value+r);
+    }
+
 }
 ~~~
 

@@ -54,6 +54,12 @@ author: Sky
 
 ### 2.单调栈
 
+
+
+一个单调增的栈，遇到不符合的值，弹出记录信息
+
+
+
 ~~~java
 	public static int largestRectangleArea2(int[] heights) {
 		int len = heights.length;
@@ -160,3 +166,37 @@ $$
 \end{array}
 $$
 二、单调栈逐行求面积（每一行就是上面的问题：柱状图中的最大矩阵）
+
+
+
+## [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+
+一个单调减的栈，遇到不符合的值，弹出记录信息
+
+~~~java
+class Solution {
+	public int[] dailyTemperatures(int[] T) {
+		int[] ans = new int[T.length];
+		Stack<Integer> downStack = new Stack<>();
+		downStack.push(0);
+		for (int i = 1; i < T.length; i++) {
+			while (!downStack.empty() && T[i] > T[downStack.peek()]) {
+				int pre = downStack.pop();
+				// 计算结果放入ans；
+				int zhi = i - pre;
+				ans[pre] = zhi;
+			}
+			downStack.push(i);
+		}
+		// 处理剩余
+		while (!downStack.empty()) {
+			ans[downStack.pop()] = 0;
+		}
+
+		return ans;
+	}
+}
+~~~
+
+
+
