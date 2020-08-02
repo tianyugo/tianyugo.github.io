@@ -219,3 +219,130 @@ class Solution {
 }
 ~~~
 
+## [面试题 17.13. 恢复空格](https://leetcode-cn.com/problems/re-space-lcci/)
+
+```
+哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子"I reset the computer. It still didn’t boot!"已经变成了"iresetthecomputeritstilldidntboot"。在处理标点符号和大小写之前，你得先把它断成词语。当然了，你有一本厚厚的词典dictionary，不过，有些词没在词典里。假设文章用sentence表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。 
+```
+
+**示例：**
+
+~~~
+输入：
+dictionary = ["looked","just","like","her","brother"]
+sentence = "jesslookedjustliketimherbrother"
+输出： 7
+解释： 断句后为"jess looked just like tim her brother"，共7个未识别字符。
+~~~
+
+
+
+~~~java
+class Solution {
+    public int respace(String[] dictionary, String sentence) {
+        HashSet<String> dic = new HashSet<>(Arrays.asList(dictionary));
+        int[] dp = new int[sentence.length()+1];
+        for (int i = 1; i < dp.length; i++) {
+            dp[i] = dp[i - 1] + 1;
+            for (int j = 0; j < i; j++) {
+                if(dic.contains(sentence.substring(j,i))){
+                    dp[i] = Math.min(dp[i],dp[j]);
+                }
+            }
+        }
+        return dp[sentence.length()];
+    }
+}
+~~~
+
+
+
+## [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)：经典
+
+```
+给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。 
+
+相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。 
+
+
+
+ 例如，给定三角形： 
+
+ [
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+
+
+ 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。 
+
+
+
+ 说明： 
+
+ 如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。 
+ Related Topics 数组 动态规划
+```
+
+ 
+
+
+
+
+```java
+import java.util.List;
+
+class Solution {
+
+//    public int minimumTotal(List<List<Integer>> triangle) {
+//        int n = triangle.size();
+//        int[][] dp = new int[n][n];
+//
+//        //为最后一行赋值
+//        for (int i = 0; i < n; i++) {
+//            dp[n - 1][i] = triangle.get(n - 1).get(i);
+//        }
+//        for (int i = n - 2; i >= 0; i--) {
+//            for (int j = 0; j <= i; j++) {
+//                dp[i][j] = triangle.get(i).get(j) + Math.min(dp[i + 1][j], dp[i + 1][j + 1]);
+//            }
+//        }
+//
+//        return dp[0][0];
+//    }
+
+
+
+    //代码优化 dp数组多赋值一行，省略给最后一行单独赋值
+
+//    int[][] dp = new int[n + 1][n + 1];
+//
+//        for (int i = n - 1; i >= 0; i--) {
+//        for (int j = 0; j <= i; j++) {
+//            dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle.get(i).get(j);
+//        }
+//    }
+
+    
+    //空间复杂度O(n)
+
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+
+        int[] dp = new int[n + 1];
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+            }
+        }
+
+        return dp[0];
+    }
+
+
+}
+
+```

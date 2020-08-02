@@ -881,7 +881,7 @@ xml
 
 增强类+两个注解
 
-> @Aspect
+> @Aspect  		//切面
 >
 > @Before(表达式)
 
@@ -1084,11 +1084,109 @@ Spring中PlatformTransactionManager根据不同持久层框架所对应的接口
 
 
 
+## 注解总结
+
+### IOC：
+
+#### 创建对象
+
+
+
+> ```java
+> @Component(value="叫啥") //value可以不写 //相当于xml中加 <bean id="叫啥" class=""></bean>
+> 	@Controller	——	web层
+> 	@Service	——  业务层
+> 	@Repository ——  持久层
+> ```
+
+> ~~~java
+> @Scope(value="prototype")//多实例
+> 	singleton //默认单实例-饿汉式
+> 	request
+>     session
+>     global session
+> ~~~
+
+#### 属性注入
+
+> @AutoWired     --自动注入，且不需要再写set方法
+>
+> ​	通过类(UserDao)找，跟id没关系
+
+> @Qualifier(value = "userDao")			需要和@AutoWired  一起使用
+>
+
+
+
+> @Value(“   ”) 注入属性
 
 
 
 
-2020年4月8日 10点38分
+
+### 新注解
+
+
+
+
+
+数据库连接池：
+
+~~~java
+@Configuration 配置类
+@PropertySource("classpath:jdbc.properties")
+public class JdbcConfig{
+
+	@Value("${jdbc.url}")
+    String url;
+    ...
+
+	@Bean
+    Public DataSource dataSource(){
+        DruidDataSource dataSource = new D..();
+        ..
+        dataSouce.setUrl(url);....
+        return dataSource
+    }
+
+}
+~~~
+
+
+
+@ConfigurationProperties(prefix=“jdbc“)
+
+
+
+### 集成Junit
+
+
+
+
+
+### AOP
+
+​			xml开启aop自动
+
+1.增强类+两个注解
+
+> @Aspect  		//切面——在增强类上
+>
+> @Before(表达式)    //——增强上，表达式写在哪增强 
+
+
+
+2.补充：相同切入点抽取（公共表达式）
+
+​	@Pointcut(value = "表达式")
+
+
+
+
+
+
+
+
 
 联系我：shentianyu18@163.com
 

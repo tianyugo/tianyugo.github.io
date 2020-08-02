@@ -477,7 +477,7 @@ class Solution {
 
 
 
-### 最大子數組和的最小值
+### 410.最大子數組和的最小值
 
 [410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
